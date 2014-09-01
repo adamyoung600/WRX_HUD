@@ -69,7 +69,7 @@ class SH1106LCD():
      Initilizes the LCD.  Values are taken from the SH1106 datasheet.
     """
     def __initialize(self):
-        time.sleep(1)
+        time.sleep(0.25)
         self.__sendCommand(0xAE)
         self.__sendCommand(0x20)
         self.__sendCommand(0x10)
@@ -101,7 +101,7 @@ class SH1106LCD():
         self.__sendCommand(0x14)
         self.__sendCommand(0xAF)
 
-        time.sleep(1)
+        time.sleep(0.5)
 
     """
      powerUp()
@@ -222,15 +222,11 @@ class SH1106LCD():
     internal buffer using the addImage method.
     """
     def displayBufferedImage(self, imageID, rowOffset, colOffset):
-        print "Attempting to display: " + imageID
         try:
-            image = 0
-            print "xx1"
             if imageID not in self.imageBuffer.keys():
                 raise ValueError(imageID + " not in the pre-processed image buffer.")
             else:
                 image = self.imageBuffer.get(imageID)
-            print "xx2"
             self.__displayProcessedImage(image, rowOffset, colOffset)
 
         except ValueError as e:
@@ -258,15 +254,11 @@ class SH1106LCD():
     of the picture starts at the coordinates indicated by row and col.
     """
     def __displayProcessedImage(self, processedImage, row, col):
-        print "step 1"
-
         try:
             #Ensure the picture will fit with the given column and row starting points.
-            print "ridiculous"
             if (processedImage.width + col > 132) or (processedImage.height/8 + row > 8):
                 raise ValueError("Picture is too large to fit on the screen with the supplied row/column: Width "
                                  + str(processedImage.width) + ", Height " + str(processedImage.height))
-            print "step 2"
             #Get the raw data from the processed image
             imageData = processedImage.data
             # Calculate the command bytes to set the column address
@@ -275,7 +267,6 @@ class SH1106LCD():
             # Lower Address Nibble Command: 0 0 0 1 A7 A6 A5 A4
             lowerColumnOffsetByte = (col & 0x0F )
             upperColumnOffsetByte = (col >> 4) + 0x10
-            print "step 3"
             #Display the image
 
             for i in range(8):
@@ -288,8 +279,6 @@ class SH1106LCD():
                 self.__sendCommand(page)
                 #The i2c bus can only take a maximum of 32 bytes of data at a time.  If the image is more than 32 pixels
                 # wide we need to break it into chunks.
-                print "before"
-
                 stream = imageData[i]
                 if(len(stream) > 32):
                     splitStream = self.__chunks(list(stream), 32)
@@ -298,11 +287,10 @@ class SH1106LCD():
                 else:
                     self.__sendData(stream)
 
-
-
         except ValueError as e:
             print "Value Error: "
             traceback.print_exc()
+
 
     def __chunks(self, inList, chunkSize):
         for i in xrange(0, len(inList), chunkSize):
