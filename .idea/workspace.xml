@@ -31,8 +31,8 @@
           <file leaf-file-name="GearIndicator.py" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/GearIndicator.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.32708332" vertical-offset="111" max-vertical-offset="1071">
-                  <caret line="25" column="51" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+                <state vertical-scroll-proportion="0.8229167" vertical-offset="111" max-vertical-offset="1071">
+                  <caret line="53" column="29" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
                   <folding>
                     <element signature="e#0#39#0" expanded="true" />
                   </folding>
@@ -57,8 +57,8 @@
           <file leaf-file-name="SH1106LCD.py" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.38648364" vertical-offset="4785" max-vertical-offset="7038">
-                  <caret line="303" column="42" selection-start-line="303" selection-start-column="42" selection-end-line="303" selection-end-column="42" />
+                <state vertical-scroll-proportion="0.7455121" vertical-offset="4326" max-vertical-offset="7004">
+                  <caret line="296" column="44" selection-start-line="296" selection-start-column="44" selection-end-line="296" selection-end-column="44" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -548,7 +548,27 @@
       <created>1409593492005</created>
       <updated>1409593492005</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Change to gear indicator test">
+      <created>1409593561362</created>
+      <updated>1409593561362</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Added byte stream chunking">
+      <created>1409594152507</created>
+      <updated>1409594152507</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Added byte stream chunking">
+      <created>1409594195238</created>
+      <updated>1409594195238</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Added byte stream chunking">
+      <created>1409594528765</created>
+      <updated>1409594528765</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Added byte stream chunking">
+      <created>1409594943825</created>
+      <updated>1409594943825</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -605,7 +625,8 @@
     <MESSAGE value="Small changes while testing Gear Indicator LCD" />
     <MESSAGE value="Changed an &quot;off by one&quot; issue in the dimension checking of the Sh1106 LCD" />
     <MESSAGE value="Change to gear indicator test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change to gear indicator test" />
+    <MESSAGE value="Added byte stream chunking" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added byte stream chunking" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -970,16 +991,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GearIndicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32708332" vertical-offset="111" max-vertical-offset="1071">
-          <caret line="25" column="51" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestGearDisplay.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
@@ -988,10 +999,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GearIndicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8229167" vertical-offset="111" max-vertical-offset="1071">
+          <caret line="53" column="29" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38648364" vertical-offset="4785" max-vertical-offset="7038">
-          <caret line="303" column="42" selection-start-line="303" selection-start-column="42" selection-end-line="303" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.7455121" vertical-offset="4326" max-vertical-offset="7004">
+          <caret line="296" column="44" selection-start-line="296" selection-start-column="44" selection-end-line="296" selection-end-column="44" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
