@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29debc9c-cb47-4156-a319-5411712143aa" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Adam\Documents\GitHub\WRX_HUD\LCDTestMain.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GearIndicator.py" afterPath="$PROJECT_DIR$/GearIndicator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py" afterPath="$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestGearDisplay.py" afterPath="$PROJECT_DIR$/TestGearDisplay.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hardware/shift_R_sized.bmp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WRX_HUD.iws" />
@@ -597,19 +594,27 @@
       <created>1409595644474</created>
       <updated>1409595644474</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="GearIndicator Testing Completion">
+      <created>1409597329242</created>
+      <updated>1409597329242</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Added image for reverse gear&#10;">
+      <created>1409597343678</created>
+      <updated>1409597343678</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299595" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -656,7 +661,8 @@
     <MESSAGE value="Change to gear indicator test" />
     <MESSAGE value="Added byte stream chunking" />
     <MESSAGE value="GearIndicator Testing Completion" />
-    <option name="LAST_COMMIT_MESSAGE" value="GearIndicator Testing Completion" />
+    <MESSAGE value="Added image for reverse gear&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added image for reverse gear&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
