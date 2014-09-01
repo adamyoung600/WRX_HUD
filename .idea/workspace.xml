@@ -15,7 +15,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
-    <option name="PATCH_PATH" value="" />
+    <option name="PATCH_PATH" value="C:\Users\Adam\Documents\GitHub\WRX_HUD" />
   </component>
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
@@ -48,7 +48,7 @@
             <entry file="file://$PROJECT_DIR$/TestGearDisplay.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-                  <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+                  <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -57,8 +57,8 @@
           <file leaf-file-name="SH1106LCD.py" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.48095757" vertical-offset="4454" max-vertical-offset="6749">
-                  <caret line="288" column="44" selection-start-line="288" selection-start-column="44" selection-end-line="288" selection-end-column="44" />
+                <state vertical-scroll-proportion="0.38648364" vertical-offset="4785" max-vertical-offset="7038">
+                  <caret line="303" column="42" selection-start-line="303" selection-start-column="42" selection-end-line="303" selection-end-column="42" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -113,8 +113,8 @@
         <option value="$PROJECT_DIR$/TestWideHK.py" />
         <option value="$PROJECT_DIR$/Hardware/Sh1106/SH1106LCD.py" />
         <option value="$PROJECT_DIR$/Hardware/WideHKOLED/WideHKOLED.py" />
-        <option value="$PROJECT_DIR$/TestGearDisplay.py" />
         <option value="$PROJECT_DIR$/GearIndicator.py" />
+        <option value="$PROJECT_DIR$/TestGearDisplay.py" />
         <option value="$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py" />
       </list>
     </option>
@@ -468,7 +468,87 @@
       <created>1409583525479</created>
       <updated>1409583525479</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Changed an &quot;off by one&quot; issue in the dimension checking of the Sh1106 LCD">
+      <created>1409586394575</created>
+      <updated>1409586394575</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Change to gear indicator test">
+      <created>1409586549761</created>
+      <updated>1409586549761</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Change to gear indicator test">
+      <created>1409586553773</created>
+      <updated>1409586553773</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Change to gear indicator test">
+      <created>1409586557278</created>
+      <updated>1409586557278</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Change to gear indicator test">
+      <created>1409586629368</created>
+      <updated>1409586629368</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Change to gear indicator test">
+      <created>1409587716595</created>
+      <updated>1409587716595</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Change to gear indicator test">
+      <created>1409591616016</created>
+      <updated>1409591616016</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Change to gear indicator test">
+      <created>1409591884112</created>
+      <updated>1409591884112</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Change to gear indicator test">
+      <created>1409591949295</created>
+      <updated>1409591949295</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Change to gear indicator test">
+      <created>1409592427680</created>
+      <updated>1409592427680</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Change to gear indicator test">
+      <created>1409592648336</created>
+      <updated>1409592648336</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Change to gear indicator test">
+      <created>1409592767083</created>
+      <updated>1409592767083</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Change to gear indicator test">
+      <created>1409592811481</created>
+      <updated>1409592811481</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Change to gear indicator test">
+      <created>1409592870583</created>
+      <updated>1409592870583</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Change to gear indicator test">
+      <created>1409592981900</created>
+      <updated>1409592981900</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Change to gear indicator test">
+      <created>1409592999416</created>
+      <updated>1409592999416</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Change to gear indicator test">
+      <created>1409593216672</created>
+      <updated>1409593216672</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Change to gear indicator test">
+      <created>1409593266544</created>
+      <updated>1409593266544</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Change to gear indicator test">
+      <created>1409593310013</created>
+      <updated>1409593310013</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Change to gear indicator test">
+      <created>1409593492005</created>
+      <updated>1409593492005</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -524,7 +604,8 @@
     <MESSAGE value="Fixed GearIndicator passing in i2c bus into SH1106 constructor." />
     <MESSAGE value="Small changes while testing Gear Indicator LCD" />
     <MESSAGE value="Changed an &quot;off by one&quot; issue in the dimension checking of the Sh1106 LCD" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed an &quot;off by one&quot; issue in the dimension checking of the Sh1106 LCD" />
+    <MESSAGE value="Change to gear indicator test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change to gear indicator test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -889,14 +970,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestGearDisplay.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-          <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GearIndicator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32708332" vertical-offset="111" max-vertical-offset="1071">
@@ -907,10 +980,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TestGearDisplay.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48095757" vertical-offset="4454" max-vertical-offset="6749">
-          <caret line="288" column="44" selection-start-line="288" selection-start-column="44" selection-end-line="288" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.38648364" vertical-offset="4785" max-vertical-offset="7038">
+          <caret line="303" column="42" selection-start-line="303" selection-start-column="42" selection-end-line="303" selection-end-column="42" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
