@@ -2,6 +2,7 @@ from Hardware.SH1106.SH1106LCD import *
 from Hardware.I2CConfig import *
 
 
+
 class GearIndicator():
 
     def __init__(self):

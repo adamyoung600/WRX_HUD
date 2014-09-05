@@ -176,12 +176,18 @@ class SH1106LCD():
     def __sendDataByte(self, dataByte):
         self.bus.write_byte_data(self.OLED_Address, self.OLED_Data_Mode, dataByte)
 
+    def sendDataByte(self, dataByte):
+        self.bus.write_byte_data(self.OLED_Address, self.OLED_Data_Mode, dataByte)
+
     """
     __sendData(data)
      
         data - Bytestream to send to the Display Data RAM.
     """
     def __sendData(self, data):
+        self.bus.write_i2c_block_data(self.OLED_Address, self.OLED_Data_Mode, data)
+
+    def sendData(self, data):
         self.bus.write_i2c_block_data(self.OLED_Address, self.OLED_Data_Mode, data)
 
     """

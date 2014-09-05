@@ -21,9 +21,7 @@ class PMConnection(object):
     
     def open(self):
         self._ser = serial.Serial(
-                #TODO: change this to the usb port on the laptop
                             port='/dev/ttyUSB0',
-                            # port='/dev/tty.usbserial-000013FA',
                             baudrate=4800,
                             timeout=2000,
                             writeTimeout=55,
