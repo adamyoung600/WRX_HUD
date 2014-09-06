@@ -154,12 +154,15 @@ class SH1106LCD():
         #Set row
         page = 0xB0 + row
         self.__sendCommand(page)
+        #For some reason, the LCD does not seem to be correctly set up to display on the first two collumn addresses.
+        #Therefor increase the column value by 2
+        column = col + 2
         # Calculate the command bytes to set the column address
         # Column Address Offset: A7 A6 A5 A4 A3 A2 A1 A0
         # Upper Address Nibble Command: 0 0 0 0 A3 A2 A1 A0
         # Lower Address Nibble Command: 0 0 0 1 A7 A6 A5 A4
-        lowerColumnOffsetByte = (col & 0x0F )
-        upperColumnOffsetByte = (col >> 4) + 0x10
+        lowerColumnOffsetByte = (column & 0x0F )
+        upperColumnOffsetByte = (column >> 4) + 0x10
         #Set column
         self.__sendCommand(upperColumnOffsetByte)	 #Upper 4 bits
         self.__sendCommand(lowerColumnOffsetByte)    #Lower 4 bits
@@ -268,14 +271,27 @@ class SH1106LCD():
     """
     def displayString(self, inString, row, col):
         #Convert string to all caps as lower case characters are not implemented in the font.
-        inString.upper()
+        displayString = inString.upper()
         #Set the row/column position
         self.setCursorPosition(row, col)
-        for c in inString:
+        currentRow = row
+        currentColumn = col
+        for c in displayString:
             #Get the ascii value and then subtract 32 as the font does not have any characters before the 32nd implemented.
             fontIndex = ord(c) - 32
             self.__sendData(self.font[fontIndex])
             self.__sendDataByte(0x00)
+            currentColumn += 6
+
+            #Wrap text to the next line if necessary.
+            if(currentColumn > 123):
+                #Bail out if you reach the bottom of the screen
+                if(currentRow >= 7):
+                    return
+                else:
+                    currentColumn = 0
+                    currentRow += 1
+                    self.setCursorPosition(currentRow, currentColumn)
 
 
     """
