@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29debc9c-cb47-4156-a319-5411712143aa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py" afterPath="$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestSH1106FontTest.py" afterPath="$PROJECT_DIR$/TestSH1106FontTest.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WRX_HUD.iws" />
@@ -26,21 +26,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TestSH1106FontTest.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TestSH1106FontTest.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestSH1106FontTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.110869564" vertical-offset="0" max-vertical-offset="920">
+              <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SH1106LCD.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SH1106LCD.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5195652" vertical-offset="4384" max-vertical-offset="7514">
-              <caret line="286" column="36" selection-start-line="286" selection-start-column="36" selection-end-line="286" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4741" max-vertical-offset="8058">
+              <caret line="282" column="37" selection-start-line="282" selection-start-column="37" selection-end-line="282" selection-end-column="37" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -107,8 +107,8 @@
         <option value="$PROJECT_DIR$/SSM/pimonitor/PMConnection.py" />
         <option value="$PROJECT_DIR$/GearIndicator.py" />
         <option value="$PROJECT_DIR$/Hardware/SH1106/SH1106FontLib.py" />
-        <option value="$PROJECT_DIR$/TestSH1106FontTest.py" />
         <option value="$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py" />
+        <option value="$PROJECT_DIR$/TestSH1106FontTest.py" />
       </list>
     </option>
   </component>
@@ -677,7 +677,23 @@
       <created>1410038928462</created>
       <updated>1410038928462</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Fixed an offset problem in SH1106.setCursorPostion()&#10;Adding text wrapping to SH1106.displayString()">
+      <created>1410039119287</created>
+      <updated>1410039119287</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Implemented the ability to display an inverted string (as if highlighted).">
+      <created>1410039688965</created>
+      <updated>1410039688965</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Implemented the ability to display an inverted string (as if highlighted).">
+      <created>1410044166739</created>
+      <updated>1410044166739</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Implemented the ability to display an inverted string (as if highlighted).">
+      <created>1410044223569</created>
+      <updated>1410044223569</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -741,7 +757,8 @@
     <MESSAGE value="First pass of SH1106 font" />
     <MESSAGE value="Finished implementing SH1106 font.&#10;Fixed SH1106.SetCursorPosition.&#10;Updated displayProcessedImage to use the new SetCursorPostion." />
     <MESSAGE value="Fixed an offset problem in SH1106.setCursorPostion()&#10;Adding text wrapping to SH1106.displayString()" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed an offset problem in SH1106.setCursorPostion()&#10;Adding text wrapping to SH1106.displayString()" />
+    <MESSAGE value="Implemented the ability to display an inverted string (as if highlighted)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented the ability to display an inverted string (as if highlighted)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1113,14 +1130,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestSH1106FontTest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Hardware/SH1106/SH1106FontLib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
@@ -1131,11 +1140,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5195652" vertical-offset="4384" max-vertical-offset="7514">
-          <caret line="286" column="36" selection-start-line="286" selection-start-column="36" selection-end-line="286" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4741" max-vertical-offset="8058">
+          <caret line="282" column="37" selection-start-line="282" selection-start-column="37" selection-end-line="282" selection-end-column="37" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestSH1106FontTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.110869564" vertical-offset="0" max-vertical-offset="920">
+          <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>

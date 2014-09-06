@@ -295,6 +295,38 @@ class SH1106LCD():
 
 
     """
+    displayInvertedString(inString, row, col)
+
+    """
+    def displayInvertedString(self, inString, row, col):
+        #Convert string to all caps as lower case characters are not implemented in the font.
+        displayString = inString.upper()
+        #Set the row/column position
+        self.setCursorPosition(row, col)
+        currentRow = row
+        currentColumn = col
+        for c in displayString:
+            #Get the ascii value and then subtract 32 as the font does not have any characters before the 32nd implemented.
+            fontIndex = ord(c) - 32
+            bytestream = self.font[fontIndex]
+            for b in bytestream:
+                #invert the byte and send it
+                self.__sendDataByte(b ^ 0xff)
+            self.__sendDataByte(0xff)
+            currentColumn += 6
+
+            #Wrap text to the next line if necessary.
+            if(currentColumn > 123):
+                #Bail out if you reach the bottom of the screen
+                if(currentRow >= 7):
+                    return
+                else:
+                    currentColumn = 0
+                    currentRow += 1
+                    self.setCursorPosition(currentRow, currentColumn)
+
+
+    """
     __displayProcessedImage(self, processedImage, row, col)
 
         processedImage - Pre-processed image.  Must be of type LCDImage below.
