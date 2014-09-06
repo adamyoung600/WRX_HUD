@@ -4,12 +4,7 @@ from Hardware.SH1106.SH1106FontLib import *
 
 i2cConfig()
 lcd = SH1106LCD()
-time.sleep(1)
-lcd.setCursorPosition(0, 0)
-time.sleep(1)
-myFont = font2
-for i in myFont:
-    lcd.sendDataByte(0x00)
-    lcd.sendData(i)
-
+lcd.displayString("This is a test!", 0, 0)
+lcd.displayString("Skip a row, please", 2, 10)
+lcd.displayString("@#$%^&*()-_=+,.<>/?\\'\";:`", 4,0)
 

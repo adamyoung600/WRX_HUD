@@ -2,6 +2,7 @@ import smbus
 import time
 from PIL import Image
 import traceback
+from SH1106FontLib import *
 import os
 
 
@@ -62,6 +63,9 @@ class SH1106LCD():
 
         #Set up internal image buffer
         self.imageBuffer = {}
+
+        #Import font
+        self.font = capFont
 
     """
      initialize()
@@ -147,10 +151,20 @@ class SH1106LCD():
      
     """
     def setCursorPosition(self, row, col):
-        rowOffsets = [0x00, 0x40]
-        baseOffset = 0x80
-        position = baseOffset + rowOffsets[row] + col
-        self.__sendCommand(position)
+        #Set row
+        page = 0xB0 + row
+        self.__sendCommand(page)
+        # Calculate the command bytes to set the column address
+        # Column Address Offset: A7 A6 A5 A4 A3 A2 A1 A0
+        # Upper Address Nibble Command: 0 0 0 0 A3 A2 A1 A0
+        # Lower Address Nibble Command: 0 0 0 1 A7 A6 A5 A4
+        lowerColumnOffsetByte = (col & 0x0F )
+        upperColumnOffsetByte = (col >> 4) + 0x10
+        #Set column
+        self.__sendCommand(upperColumnOffsetByte)	 #Upper 4 bits
+        self.__sendCommand(lowerColumnOffsetByte)    #Lower 4 bits
+
+
 
     """
      __sendCommand(command)
@@ -248,6 +262,21 @@ class SH1106LCD():
         processedImage = self.LCDImage(filename)
         self.__displayProcessedImage(processedImage, rowOffset, colOffset)
 
+    """
+    displayString(inString, row, col)
+
+    """
+    def displayString(self, inString, row, col):
+        #Convert string to all caps as lower case characters are not implemented in the font.
+        inString.upper()
+        #Set the row/column position
+        self.setCursorPosition(row, col)
+        for c in inString:
+            #Get the ascii value and then subtract 32 as the font does not have any characters before the 32nd implemented.
+            fontIndex = ord(c) - 32
+            self.__sendData(self.font[fontIndex])
+            self.__sendDataByte(0x00)
+
 
     """
     __displayProcessedImage(self, processedImage, row, col)
@@ -267,20 +296,11 @@ class SH1106LCD():
                                  + str(processedImage.width) + ", Height " + str(processedImage.height))
             #Get the raw data from the processed image
             imageData = processedImage.data
-            # Calculate the command bytes to set the column address
-            # Column Address Offset: A7 A6 A5 A4 A3 A2 A1 A0
-            # Upper Address Nibble Command: 0 0 0 0 A3 A2 A1 A0
-            # Lower Address Nibble Command: 0 0 0 1 A7 A6 A5 A4
-            lowerColumnOffsetByte = (col & 0x0F )
-            upperColumnOffsetByte = (col >> 4) + 0x10
-            #Display the image
 
-            for i in range(8):
+            #Display the image
+            for i in range(row, 7):
+                self.setCursorPosition(col)
                 # Set column
-                self.__sendCommand(upperColumnOffsetByte)	 #set upper 4 bits of column offset
-                self.__sendCommand(lowerColumnOffsetByte)
-                # Set current page
-                # Page command byte: 1 0 1 1 P4 P3 P2 P1
                 page = 0xB0 + i
                 self.__sendCommand(page)
                 #The i2c bus can only take a maximum of 32 bytes of data at a time.  If the image is more than 32 pixels
