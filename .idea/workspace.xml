@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29debc9c-cb47-4156-a319-5411712143aa" name="Default" comment="">
+    <list default="true" id="29debc9c-cb47-4156-a319-5411712143aa" name="Default" comment="Changed debounce time and time recording location in keypad test.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestCase/TestKeypad.py" afterPath="$PROJECT_DIR$/TestCase/TestKeypad.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -91,8 +91,8 @@
       <file leaf-file-name="TestKeypad.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestCase/TestKeypad.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5543478" vertical-offset="0" max-vertical-offset="1003">
-              <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.6836957" vertical-offset="0" max-vertical-offset="1003">
+              <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -728,7 +728,11 @@
       <created>1410303952272</created>
       <updated>1410303952273</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Added software debounce to the keypad test.">
+      <created>1410304687443</created>
+      <updated>1410304687444</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -794,7 +798,8 @@
     <MESSAGE value="Fixed an offset problem in SH1106.setCursorPostion()&#10;Adding text wrapping to SH1106.displayString()" />
     <MESSAGE value="Implemented the ability to display an inverted string (as if highlighted)." />
     <MESSAGE value="Added skeleton of menuing system.  Added test case for physical keypad." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added skeleton of menuing system.  Added test case for physical keypad." />
+    <MESSAGE value="Added software debounce to the keypad test." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added software debounce to the keypad test." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1183,8 +1188,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TestCase/TestKeypad.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5543478" vertical-offset="0" max-vertical-offset="1003">
-          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.6836957" vertical-offset="0" max-vertical-offset="1003">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>

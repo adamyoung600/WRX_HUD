@@ -12,30 +12,30 @@ setTimeStamp = 0
 def upCallback(channel):
     global upTimeStamp
     tempTime = time.time()
-    if (tempTime - upTimeStamp) >= 0.2:
+    if (tempTime - upTimeStamp) >= 0.3:
         print("Up")
-        upTimeStamp = tempTime
+    upTimeStamp = tempTime
 
 def downCallback(channel):
     global downTimeStamp
     tempTime = time.time()
-    if (tempTime - downTimeStamp) >= 0.2:
+    if (tempTime - downTimeStamp) >= 0.3:
         print("Down")
-        downTimeStamp = tempTime
+    downTimeStamp = tempTime
 
 def setCallback(channel):
     global setTimeStamp
     tempTime = time.time()
-    if (tempTime - setTimeStamp) >= 0.2:
+    if (tempTime - setTimeStamp) >= 0.3:
         print("Set")
-        setTimeStamp = tempTime
+    setTimeStamp = tempTime
 
 def backCallback(channel):
     global backTimeStamp
     tempTime = time.time()
-    if (tempTime - backTimeStamp) >= 0.2:
+    if (tempTime - backTimeStamp) >= 0.3:
         print("Back")
-        backTimeStamp = tempTime
+    backTimeStamp = tempTime
 
 GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
