@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29debc9c-cb47-4156-a319-5411712143aa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MenuSystem/DtcCodeContext.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MenuSystem/MainMenuContext.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MenuSystem/MenuContext.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MenuSystem/MenuManager.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MenuSystem/MonitoredParameterContext.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MenuSystem/PeakBoostContext.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestCase/TestKeypad.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestCase/TestMenuSystem.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MenuSystem/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TestCase/__init__.py" />
-      <change type="MOVED" beforePath="C:\Users\Adam\Documents\GitHub\WRX_HUD\TestGearDisplay.py" afterPath="$PROJECT_DIR$/TestCase/TestGearDisplay.py" />
-      <change type="MOVED" beforePath="C:\Users\Adam\Documents\GitHub\WRX_HUD\TestSH1106FontTest.py" afterPath="$PROJECT_DIR$/TestCase/TestSH1106FontTest.py" />
-      <change type="MOVED" beforePath="C:\Users\Adam\Documents\GitHub\WRX_HUD\TestSampleGearRatio.py" afterPath="$PROJECT_DIR$/TestCase/TestSampleGearRatio.py" />
-      <change type="MOVED" beforePath="C:\Users\Adam\Documents\GitHub\WRX_HUD\TestWideHK.py" afterPath="$PROJECT_DIR$/TestCase/TestWideHK.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py" afterPath="$PROJECT_DIR$/Hardware/SH1106/SH1106LCD.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestCase/TestKeypad.py" afterPath="$PROJECT_DIR$/TestCase/TestKeypad.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WRX_HUD.iws" />
@@ -105,8 +91,8 @@
       <file leaf-file-name="TestKeypad.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestCase/TestKeypad.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5728261" vertical-offset="0" max-vertical-offset="920">
-              <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.5543478" vertical-offset="0" max-vertical-offset="1003">
+              <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -738,13 +724,18 @@
       <created>1410044270622</created>
       <updated>1410044270622</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Added skeleton of menuing system.  Added test case for physical keypad.">
+      <created>1410303952272</created>
+      <updated>1410303952273</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299595" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -759,7 +750,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299595" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -803,7 +793,8 @@
     <MESSAGE value="Finished implementing SH1106 font.&#10;Fixed SH1106.SetCursorPosition.&#10;Updated displayProcessedImage to use the new SetCursorPostion." />
     <MESSAGE value="Fixed an offset problem in SH1106.setCursorPostion()&#10;Adding text wrapping to SH1106.displayString()" />
     <MESSAGE value="Implemented the ability to display an inverted string (as if highlighted)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented the ability to display an inverted string (as if highlighted)." />
+    <MESSAGE value="Added skeleton of menuing system.  Added test case for physical keypad." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added skeleton of menuing system.  Added test case for physical keypad." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1192,8 +1183,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TestCase/TestKeypad.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5728261" vertical-offset="0" max-vertical-offset="920">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.5543478" vertical-offset="0" max-vertical-offset="1003">
+          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
