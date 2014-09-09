@@ -311,7 +311,7 @@ class SH1106LCD():
             bytestream = self.font[fontIndex]
             for b in bytestream:
                 #invert the byte and send it
-                self.__sendDataByte(b ^ 0xff)
+                self.__sendDataByte(b ^ 0x7f)
             self.__sendDataByte(0xff)
             currentColumn += 6
 
