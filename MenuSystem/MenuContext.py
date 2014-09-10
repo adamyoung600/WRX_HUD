@@ -2,7 +2,7 @@ import Hardware.SH1106.SH1106LCD
 
 
 
-class MenuContext():
+class MenuContext(object):
 
     def __init__(self, inManager, inLcd):
         self.manager = inManager

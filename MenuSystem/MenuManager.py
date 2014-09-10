@@ -1,7 +1,7 @@
-from MenuSystem import MainMenuContext
-from MenuSystem import MonitoredParameterContext
-from MenuSystem import PeakBoostContext
-from MenuSystem import DtcCodeContext
+from MenuSystem.MainMenuContext import *
+from MenuSystem.MonitoredParameterContext import *
+from MenuSystem.PeakBoostContext import *
+from MenuSystem.DtcCodeContext import *
 
 class MenuManager():
 
