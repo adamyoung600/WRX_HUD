@@ -14,7 +14,12 @@ class PeakBoostContext(MenuContext):
     Used to display the menu data on the LCD
     """
     def initDisplay(self):
-        pass
+        self.lcd.displayString(self.title, 0, 0)
+        self.lcd.displayString("--------------------------------", 1, 0)
+        for i in range(0, len(self.entries)):
+            self.lcd.displayString(self.entries[i], i+2, 17)
+        self.lcd.displayString(">", 2, 5)
+
     def updateDisplay(self):
         pass
 
@@ -23,10 +28,28 @@ class PeakBoostContext(MenuContext):
     Need to be implemented by child classes
     """
     def onUp(self):
-        pass
+        if self.currentEntry > 0:
+            self.lastEntry = self.currentEntry
+            self.currentEntry -= 1
+            self.updateDisplay()
+
     def onDown(self):
-        pass
+        if self.currentEntry < len(self.entries)-1:
+            self.lastEntry = self.currentEntry
+            self.currentEntry += 1
+            self.updateDisplay()
+
     def onSet(self):
-        pass
+        if self.currentEntry==0:
+            self.displayBoost()
+        elif self.currentEntry==1:
+            self.resetBoost()
+
     def onBack(self):
+        self.manager.setCurrentContext("Main Menu")
+
+    def displayBoost(self):
+        pass
+
+    def resetBoost(self):
         pass

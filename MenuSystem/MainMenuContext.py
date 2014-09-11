@@ -7,8 +7,8 @@ class MainMenuContext(MenuContext):
     def __init__(self, inManager, inLcd):
         super(MainMenuContext, self).__init__(inManager, inLcd)
         self.title = "Main"         #Title to display at the top of the display when this menu is active.
-        self.entries = ["SSM Parameters", "Peak Boost", "Test1", "Test2"]           #Holds a reference to all the possible entries in the menu
-        self.isSet = [False, False, False, False]
+        self.entries = ["SSM Parameters", "Peak Boost", "Trouble Codes"]           #Holds a reference to all the possible entries in the menu
+
 
     """
     Used to display the menu data on the LCD
@@ -32,25 +32,24 @@ class MainMenuContext(MenuContext):
     """
     def onUp(self):
         if self.currentEntry > 0:
-            print "Up"
             self.lastEntry = self.currentEntry
             self.currentEntry -= 1
             self.updateDisplay()
 
     def onDown(self):
         if self.currentEntry < len(self.entries)-1:
-            print "Down"
             self.lastEntry = self.currentEntry
             self.currentEntry += 1
             self.updateDisplay()
 
     def onSet(self):
-        print "Set"
-        if not self.isSet[self.currentEntry]:
-            self.lcd.displayString("*", self.currentEntry+2, 11)
-            self.isSet[self.currentEntry] = True
-        else:
-            self.lcd.displayString(" ", self.currentEntry+2, 11)
-            self.isSet[self.currentEntry] = False
+        if self.currentEntry==0:
+            self.manager.setCurrentContext("Monitored Parameters")
+        elif self.currentEntry==1:
+            self.manager.setCurrentContext("Peak Boost")
+        elif self.currentEntry==2:
+            self.manager.setCurrentContext("Trouble Codes")
+
     def onBack(self):
-        pass
+        #Exit menuingMode
+        self.manager.menuMode = False

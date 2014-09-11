@@ -12,7 +12,7 @@ class MenuManager():
         self.contexts['Main Menu'] = MainMenuContext(self, inLcd)
         self.contexts['Monitored Parameters'] = MonitoredParameterContext(self, inLcd)
         self.contexts['Peak Boost'] = PeakBoostContext(self, inLcd)
-        self.contexts['DtcCodeContext'] = DtcCodeContext(self, inLcd)
+        self.contexts['Trouble Codes'] = DtcCodeContext(self, inLcd)
 
         self.currentContext = 'Main Menu'
         self.menuMode = False
@@ -45,6 +45,7 @@ class MenuManager():
     """
     def setCurrentContext(self, inContext):
         self.currentContext = inContext
+        self.initiateDisplay()
 
     def initiateDisplay(self):
         self.contexts[self.currentContext].initDisplay()
