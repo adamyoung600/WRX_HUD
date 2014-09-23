@@ -46,7 +46,7 @@ class MainMenuContext(MenuContext):
 
     def onSet(self):
         print "Set"
-        if not self.isSet(self.currentEntry):
+        if not self.isSet[self.currentEntry]:
             self.lcd.displayString("*", self.currentEntry+2, 11)
             self.isSet[self.currentEntry] = True
         else:

@@ -31,7 +31,7 @@ class PMXmlParser(xml.sax.ContentHandler):
         self._element_no = 0
         
         self._message = "Parsing XML data"
-        source = open(os.path.join("SSM/data", file_name))
+        source = open(os.path.join("../SSM/data", file_name))
         xml.sax.parse(source, self)
         
         return self._parameters
