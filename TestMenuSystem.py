@@ -1,7 +1,6 @@
 from MenuSystem.MenuManager import MenuManager
 from Hardware.SH1106 import SH1106LCD
-import pygame
-from pygame.locals import *
+from pygame import *
 
 pygame.init()
 screen = pygame.display.set_mode((640, 480))
