@@ -1,4 +1,4 @@
-from MenuSystem import MenuManager
+from MenuSystem.MenuManager import MenuManager
 from Hardware.SH1106 import SH1106LCD
 from Tkinter import *
 
