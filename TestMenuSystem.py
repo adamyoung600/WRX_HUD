@@ -1,5 +1,5 @@
-from MenuSystem.MenuManager import MenuManager
-from Hardware.SH1106 import SH1106LCD
+from MenuSystem.MenuManager.MenuManager import *
+from Hardware.SH1106.SH1106LCD import *
 from pygame import *
 
 pygame.init()

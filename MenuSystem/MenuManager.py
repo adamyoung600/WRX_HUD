@@ -21,6 +21,7 @@ class MenuManager():
     Callbacks for buttons
     """
     def upButtonCallback(self):
+        print "Up callback"
         if self.menuMode:
             self.contexts[self.currentContext].onUp()
 

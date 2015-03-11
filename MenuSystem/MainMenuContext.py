@@ -21,6 +21,7 @@ class MainMenuContext(MenuContext):
         self.lcd.displayString(">", 2, 5)
 
     def updateDisplay(self):
+        print "MainMenuContext updateDisplay"
         #Wipe arrow on the last line
         self.lcd.displayString(" ", self.lastEntry+2, 5)
         #Point arrow to new line
@@ -31,6 +32,7 @@ class MainMenuContext(MenuContext):
     Need to be implemented by child classes
     """
     def onUp(self):
+        print "MainMenuContext onUp"
         if self.currentEntry > 0:
             self.lastEntry = self.currentEntry
             self.currentEntry -= 1
