@@ -50,3 +50,6 @@ class MenuManager():
 
     def initiateDisplay(self):
         self.contexts[self.currentContext].initDisplay()
+
+    def enterMenuMode(self):
+        self.menuMode = True

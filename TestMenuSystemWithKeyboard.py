@@ -8,6 +8,7 @@ from Hardware.Input.Keyboard import *
 lcd = SH1106LCD()
 menuSystem = MenuManager(lcd)
 menuSystem.initiateDisplay()
+menuSystem.enterMenuMode()
 keyboard = Keyboard()
 
 while True:
