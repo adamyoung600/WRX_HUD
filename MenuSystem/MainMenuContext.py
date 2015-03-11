@@ -14,11 +14,13 @@ class MainMenuContext(MenuContext):
     Used to display the menu data on the LCD
     """
     def initDisplay(self):
+        self.lcd.clearScreen()
         self.lcd.displayString(self.title, 0, 0)
-        self.lcd.displayString("--------------------------------", 1, 0)
+        self.lcd.displayString("---------------------", 1, 0)
         for i in range(0, len(self.entries)):
             self.lcd.displayString(self.entries[i], i+2, 17)
         self.lcd.displayString(">", 2, 5)
+        self.currentEntry = 0
 
     def updateDisplay(self):
         print "MainMenuContext updateDisplay"
@@ -45,6 +47,7 @@ class MainMenuContext(MenuContext):
             self.updateDisplay()
 
     def onSet(self):
+        print "MainMenuContext onSet"
         if self.currentEntry==0:
             self.manager.setCurrentContext("Monitored Parameters")
         elif self.currentEntry==1:
