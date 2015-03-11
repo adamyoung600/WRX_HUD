@@ -3,6 +3,9 @@ import tty, termios
 
 class Keyboard():
 
+    def __init__(self):
+        pass
+
 
     def getChar(self):
         fd = sys.stdin.fileno()
