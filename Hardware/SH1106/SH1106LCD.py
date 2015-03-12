@@ -346,7 +346,7 @@ class SH1106LCD():
             imageData = processedImage.data
 
             #Display the image
-            for i in range(row, 7):
+            for i in range(row, 8):
                 self.setCursorPosition(row, col)
                 # Set column
                 page = 0xB0 + i
