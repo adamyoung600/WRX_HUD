@@ -20,7 +20,6 @@ class MonitoredParameterContext(MenuContext):
 
     """
     Callback methods that perform an action for a button press based on which menu the user is in.
-    Need to be implemented by child classes
     """
     def onUp(self):
         pass

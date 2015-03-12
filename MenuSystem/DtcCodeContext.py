@@ -11,16 +11,7 @@ class DtcCodeContext(MenuContext):
 
 
     """
-    Used to display the menu data on the LCD
-    """
-    def initDisplay(self):
-        pass
-    def updateDisplay(self):
-        pass
-
-    """
     Callback methods that perform an action for a button press based on which menu the user is in.
-    Need to be implemented by child classes
     """
     def onUp(self):
         pass

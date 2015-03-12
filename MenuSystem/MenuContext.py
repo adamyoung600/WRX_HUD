@@ -16,9 +16,28 @@ class MenuContext(object):
     Used to display the menu data on the LCD
     """
     def initDisplay(self):
-        pass
+        self.lcd.clearScreen()
+        #Display title
+        self.lcd.displayString(self.title, 0, 0)
+        self.lcd.displayString("---------------------", 1, 0)
+        #Display options
+        for i in range(0, len(self.entries)):
+            #wipe any old arrows
+            self.lcd.displayString(" ", i+2, 5)
+            #place text for entry
+            self.lcd.displayString(self.entries[i], i+2, 17)
+        #Set new arrow to current selection
+        self.lcd.displayString(">", 2, 5)
+        self.currentEntry = 0
+
+    """
+    Called to update the display after input has been processed
+    """
     def updateDisplay(self):
-        pass
+        #Wipe arrow on the last line
+        self.lcd.displayString(" ", self.lastEntry+2, 5)
+        #Point arrow to new line
+        self.lcd.displayString(">", self.currentEntry+2, 5)
 
     """
     Callback methods that perform an action for a button press based on which menu the user is in.
