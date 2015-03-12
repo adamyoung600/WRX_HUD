@@ -347,7 +347,7 @@ class SH1106LCD():
 
             #Display the image
             for i in range(row, 7):
-                self.setCursorPosition(col)
+                self.setCursorPosition(row, col)
                 # Set column
                 page = 0xB0 + i
                 self.__sendCommand(page)

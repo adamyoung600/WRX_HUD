@@ -39,7 +39,7 @@ class MainMenuContext(MenuContext):
             self.lastEntry = self.currentEntry
             self.currentEntry -= 1
             self.updateDisplay()
-
+s
     def onDown(self):
         if self.currentEntry < len(self.entries)-1:
             self.lastEntry = self.currentEntry
