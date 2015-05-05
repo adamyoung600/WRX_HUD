@@ -13,7 +13,6 @@ class MainMenuContext(MenuContext):
     Callback methods that perform an action for a button press based on which menu the user is in.
     """
     def onUp(self):
-        print "MainMenuContext onUp"
         if self.currentEntry > 0:
             self.lastEntry = self.currentEntry
             self.currentEntry -= 1
@@ -26,7 +25,6 @@ class MainMenuContext(MenuContext):
             self.updateDisplay()
 
     def onSet(self):
-        print "MainMenuContext onSet"
         if self.currentEntry==0:
             self.manager.setCurrentContext("Monitored Parameters")
         elif self.currentEntry==1:

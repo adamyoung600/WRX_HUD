@@ -2,26 +2,6 @@
 from Hardware.I2CConfig import *
 from Hardware.WideHKOLED.WideHKOLED import *
 
-import traceback
-import time
-
-
-
-
-import array
-import os
-import os.path
-import time
-import cPickle as pickle
-
-from SSM.pimonitor.PM import PM
-from SSM.pimonitor.PMConnection import PMConnection
-from SSM.pimonitor.PMPacket import PMPacket
-from SSM.pimonitor.PMParameter import PMParameter
-from SSM.pimonitor.PMUtils import PMUtils
-from SSM.pimonitor.PMXmlParser import PMXmlParser
-
-
 
 """
 Used to sample the gear ratio in the car.  Testing purposes.

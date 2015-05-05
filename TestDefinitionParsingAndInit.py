@@ -1,8 +1,10 @@
 import traceback
 import time
+
 from SSM.pimonitor.PMConnection import PMConnection
 from SSM.pimonitor.PMXmlParser import PMXmlParser
-from SSM.pimonitor.PMSwitchParser import PMSwitchParser
+from EngineData.SSM.pimonitor import PMSwitchParser
+
 
 if __name__=="__main__":
     parser = PMXmlParser()

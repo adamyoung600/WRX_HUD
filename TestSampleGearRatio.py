@@ -1,9 +1,8 @@
-
 import traceback
 import time
-from SSM.pimonitor.PMConnection import PMConnection
-from SSM.pimonitor.PMXmlParser import PMXmlParser
 
+from SSM.pimonitor.PMXmlParser import PMXmlParser
+from EngineData.SSM.pimonitor import PMConnection
 
 
 """

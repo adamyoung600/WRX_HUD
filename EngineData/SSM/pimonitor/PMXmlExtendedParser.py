@@ -1,46 +1,45 @@
-'''
-Created on 29-03-2013
+__author__ = 'Adam'
 
-@author: citan
-'''
 
 import xml.sax
 import os.path
 
-from PM import PM
-from PMParameter import PMParameter
+from PMExtendedParameter import PMExtendedParameter
+
 
 # TODO: dependencies
 # TODO: ecuparams
 
-class PMXmlParser(xml.sax.ContentHandler):
+class PMXmlExtendedParser(xml.sax.ContentHandler):
     '''
     classdocs
     '''
 
 
-    def __init__(self):
+    def __init__(self, ecuid):
         '''
         Constructor
         '''
         xml.sax.ContentHandler.__init__(self)
-        
-    def parse(self, file_name):
+        self._foundEcuId = False
+
+    def parse(self, file_name, ecuid):
+        self._ecuid = ecuid
         self._parameters = set()
         self._parameter = None
         self._element_no = 0
-        
+
         self._message = "Parsing XML data"
         source = open(os.path.join("../SSM/data", file_name))
         xml.sax.parse(source, self)
-        
+
         return self._parameters
 
     """
     Override to make sure we parse the romraider xml properly
     """
     def startElement(self, name, attrs):
-        if name == "parameter":
+        if name == "ecuparam":
             # set optional arguments
             byte_index = "none"
             bit_index = "none"
@@ -59,22 +58,24 @@ class PMXmlParser(xml.sax.ContentHandler):
                 if k == "target":
                     target = int(v)
 
-            self._parameter = PMParameter(pid, name, desc, byte_index, bit_index, target)
-                          
-        if name == "address":
-            self._addrlen = 1
+            self._parameter = PMExtendedParameter(pid, name, desc, target)
+
+        if name == "ecu":
             for (k,v) in attrs.items():
-                if k == "length":
-                    self._addrlen = int(v)
-                    
+                if k == "id" and v == self._ecuid:
+                    self._foundEcuId = True
+
+        if name == "address":
+            if self._foundEcuId:
+                self._addrlen = 1
+                for (k,v) in attrs.items():
+                    if k == "length":
+                        self._addrlen = int(v)
+                self._foundEcuId = False
+
         if name == "depends":
             self._addrlen = 0
 
-        if name == "ref":
-            for (k,v) in attrs.items():
-                if k == "parameter":
-                    self._parameter.add_dependency(v)
-            
         if name == "conversion" and self._parameter != None:
             for (k,v) in attrs.items():
                 if k == "units":
@@ -83,10 +84,10 @@ class PMXmlParser(xml.sax.ContentHandler):
                     expr = v
                 if k == "format":
                     value_format = v
-                    
+
             if self._parameter != None:
                 self._parameter.add_conversion([units, expr, value_format])
-        
+
         self._name = name
 
     """
@@ -100,11 +101,12 @@ class PMXmlParser(xml.sax.ContentHandler):
     Override to make sure we parse the romraider xml properly
     """
     def endElement(self, name):
-        if name == "parameter":
+        if name == "ecuparam":
             self._parameters.add(self._parameter)
+            self._foundEcuId = False
             self._parameter = None
             self._addrlen = None
-             
+
         if name == "address":
             self._addrlen = 0
 
@@ -112,6 +114,6 @@ class PMXmlParser(xml.sax.ContentHandler):
             pass
 
         self._name = ""
-        
+
         self._element_no += 1
 
