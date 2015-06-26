@@ -2,6 +2,7 @@ from MenuSystem.MainMenuContext import *
 from MenuSystem.MonitoredParameterContext import *
 from MenuSystem.PeakBoostContext import *
 from MenuSystem.DtcCodeContext import *
+from MenuSystem.WifiContext import *
 
 class MenuManager():
 
@@ -13,6 +14,7 @@ class MenuManager():
         self.contexts['Monitored Parameters'] = MonitoredParameterContext(self, inLcd)
         self.contexts['Peak Boost'] = PeakBoostContext(self, inLcd)
         self.contexts['Trouble Codes'] = DtcCodeContext(self, inLcd)
+        self.contexts['Wifi Config'] = WifiContext(self, inLcd)
 
         self.currentContext = 'Main Menu'
         self.menuMode = False
@@ -21,7 +23,6 @@ class MenuManager():
     Callbacks for buttons
     """
     def upButtonCallback(self):
-        print "Up callback"
         if self.menuMode:
             self.contexts[self.currentContext].onUp()
 

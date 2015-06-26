@@ -7,7 +7,7 @@ class MainMenuContext(MenuContext):
     def __init__(self, inManager, inLcd):
         super(MainMenuContext, self).__init__(inManager, inLcd)
         self.title = "Main"         #Title to display at the top of the display when this menu is active.
-        self.entries = ["SSM Parameters", "Peak Boost", "Trouble Codes"]           #Holds a reference to all the possible entries in the menu
+        self.entries = ["SSM Parameters", "Peak Boost", "Trouble Codes", "Wifi Config"]           #Holds a reference to all the possible entries in the menu
 
     """
     Callback methods that perform an action for a button press based on which menu the user is in.
@@ -31,6 +31,8 @@ class MainMenuContext(MenuContext):
             self.manager.setCurrentContext("Peak Boost")
         elif self.currentEntry==2:
             self.manager.setCurrentContext("Trouble Codes")
+        elif self.currentEntry==3:
+            self.manager.setCurrentContext("Wifi Config")
 
     def onBack(self):
         #Exit menuingMode
