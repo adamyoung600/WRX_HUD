@@ -1,0 +1,1827 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logger SYSTEM "logger.dtd">
+<!--ROMRAIDER METRIC UNITS LOGGER DEFINITION FILE (VERSION 131) 20130306_231448 [en]
+
+<logger version="131">
+    <protocols>
+        <protocol id="SSM" baud="4800" databits="8" stopbits="1" parity="0" connect_timeout="2000" send_timeout="55">
+            <parameters>
+                <parameter id="P1" name="Engine Load (Relative)" desc="P1" ecubyteindex="8" ecubit="7" target="1">
+                    <address>0x000007</address>
+                    <conversions>
+                        <conversion units="%" expr="x*100/255" format="0.00" />
+                    </conversions>
+                </parameter>
+                <parameter id="P2" name="Coolant Temperature" desc="P2" ecubyteindex="8" ecubit="6" target="1">
+                    <address>0x000008</address>
+                    <conversions>
+                        <conversion units="C" expr="x-40" format="0" gauge_min="-20" gauge_max="120" gauge_step="20" />
+                        <conversion units="F" expr="32+9*(x-40)/5" format="0" gauge_min="0" gauge_max="240" gauge_step="30" />
+                    </conversions>
+                </parameter>
+                <parameter id="P3" name="A/F Correction #1" desc="P3" ecubyteindex="8" ecubit="5" target="1">
+                    <address>0x000009</address>
+                    <conversions>
+                        <conversion units="%" expr="(x-128)*100/128" format="0.00" gauge_min="-20" gauge_max="20" gauge_step="5" />
+                    </conversions>
+                </parameter>
+                <parameter id="P4" name="A/F Learning #1" desc="P4" ecubyteindex="8" ecubit="4" target="1">
+                    <address>0x00000A</address>
+                    <conversions>
+                        <conversion units="%" expr="(x-128)*100/128" format="0.00" gauge_min="-20" gauge_max="20" gauge_step="5" />
+                    </conversions>
+                </parameter>
+                <parameter id="P7" name="Manifold Absolute Pressure" desc="P7-Pressure value calculated from the manifold absolute pressure sensor (absolute value)" ecubyteindex="8" ecubit="1" target="1">
+                    <address>0x00000D</address>
+                    <conversions>
+                        <conversion units="kPa" expr="x" format="0" gauge_min="-120" gauge_max="280" gauge_step="40" />
+                        <conversion units="hPa" expr="x*10" format="0" gauge_min="-1200" gauge_max="2800" gauge_step="400" />
+                        <conversion units="bar" expr="x/100" format="0.000" gauge_min="-1.2" gauge_max="2.8" gauge_step="0.4" />
+                        <conversion units="psi" expr="x*37/255" format="0.00" gauge_min="-20" gauge_max="40" gauge_step="5" />
+                        <conversion units="inHg" expr="x*0.2953" format="0.00" gauge_min="-40" gauge_max="60" gauge_step="10" />
+                        <conversion units="mmHg" expr="x*7.5" format="0" gauge_min="-1000" gauge_max="2000" gauge_step="300" />
+                    </conversions>
+                </parameter>
+                <parameter id="P8" name="Engine Speed" desc="P8" ecubyteindex="8" ecubit="0" target="3">
+                    <address length="2">0x00000E</address>
+                    <conversions>
+                        <conversion units="rpm" expr="x/4" format="0" />
+                    </conversions>
+                </parameter>
+                <parameter id="P9" name="Vehicle Speed" desc="P9" ecubyteindex="9" ecubit="7" target="1">
+                    <address>0x000010</address>
+                    <conversions>
+                        <conversion units="km/h" expr="x" format="0" gauge_min="0" gauge_max="300" gauge_step="30" />
+                        <conversion units="mph" expr="x*0.621371192" format="0" />
+                    </conversions>
+                </parameter>
+                <parameter id="P10" name="Ignition Total Timing" desc="P10" ecubyteindex="9" ecubit="6" target="1">
+                    <address>0x000011</address>
+                    <conversions>
+                        <conversion units="degrees" expr="(x-128)/2" format="0.00" gauge_min="20" gauge_max="60" gauge_step="10" />
+                    </conversions>
+                </parameter>
+                <parameter id="P11" name="Intake Air Temperature" desc="P11" ecubyteindex="9" ecubit="5" target="1">
+                    <address>0x000012</address>
+                    <conversions>
+                        <conversion units="C" expr="x-40" format="0" gauge_min="-20" gauge_max="60" gauge_step="10" />
+                        <conversion units="F" expr="32+9*(x-40)/5" format="0" gauge_min="0" gauge_max="140" gauge_step="20" />
+                    </conversions>
+                </parameter>
+                <parameter id="P12" name="Mass Airflow" desc="P12" ecubyteindex="9" ecubit="4" target="1">
+                    <address length="2">0x000013</address>
+                    <conversions>
+                        <conversion units="g/s" expr="x/100" format="0.00" gauge_min="0" gauge_max="400" gauge_step="20" />
+                    </conversions>
+                </parameter>
+                <parameter id="P13" name="Throttle Opening Angle" desc="P13-Engine throttle opening angle." ecubyteindex="9" ecubit="3" target="1">
+                    <address>0x000015</address>
+                    <conversions>
+                        <conversion units="%" expr="x*100/255" format="0.00" />
+                    </conversions>
+                </parameter>
+                <parameter id="P24" name="Atmospheric Pressure" desc="P24" ecubyteindex="10" ecubit="0" target="1">
+                    <address>0x000023</address>
+                    <conversions>
+                        <conversion units="kPa" expr="x" format="0" gauge_min="0" gauge_max="255" gauge_step="20" />
+                        <conversion units="hPa" expr="x*10" format="0" gauge_min="0" gauge_max="1500" gauge_step="100" />
+                        <conversion units="bar" expr="x/100" format="0.000" gauge_min="0" gauge_max="1.5" gauge_step="0.1" />
+                        <conversion units="psi" expr="x*37/255" format="0.00" gauge_min="0" gauge_max="20" gauge_step="2" />
+                        <conversion units="inHg" expr="x*0.2953" format="0.00" gauge_min="-40" gauge_max="60" gauge_step="10" />
+                        <conversion units="mmHg" expr="x*7.5" format="0" gauge_min="-1000" gauge_max="2000" gauge_step="300" />
+                    </conversions>
+                </parameter>
+                <parameter id="P25" name="Manifold Relative Pressure" desc="P25" ecubyteindex="11" ecubit="7" target="1">
+                    <address>0x000024</address>
+                    <conversions>
+                        <conversion units="kPa" expr="x-128" format="0" gauge_min="-130" gauge_max="130" gauge_step="20" />
+                        <conversion units="hPa" expr="(x-128)*10" format="0" gauge_min="-2000" gauge_max="2000" gauge_step="400" />
+                        <conversion units="bar" expr="(x-128)/100" format="0.000" gauge_min="-2" gauge_max="2" gauge_step="0.4" />
+                        <conversion units="psi" expr="(x-128)*37/255" format="0.00" gauge_min="-30" gauge_max="30" gauge_step="5" />
+                    </conversions>
+                </parameter>
+                <parameter id="P29" name="Learned Ignition Timing" desc="P29-Advance or retard amount when knocking has occurred." ecubyteindex="11" ecubit="3" target="1">
+                    <address>0x000028</address>
+                    <conversions>
+                        <conversion units="degrees" expr="(x-128)/2" format="0.00" />
+                    </conversions>
+                </parameter>
+                <parameter id="P30" name="Accelerator Pedal Angle" desc="P30-Accelerator pedal angle." ecubyteindex="11" ecubit="2" target="3">
+                    <address>0x000029</address>
+                    <conversions>
+                        <conversion units="%" expr="x*100/255" format="0.00" />
+                    </conversions>
+                </parameter>
+                <parameter id="P36" name="Primary Wastegate Duty Cycle" desc="P36-Trubo Control Valve Duty Cycle" ecubyteindex="12" ecubit="3" target="1">
+                    <address>0x000030</address>
+                    <conversions>
+                        <conversion units="%" expr="x*100/255" format="0.00" />
+                    </conversions>
+                </parameter>
+                <parameter id="P90" name="IAM" desc="P90" ecubyteindex="55" ecubit="0" target="1">
+                    <address>0x0000F9</address>
+                    <conversions>
+                        <conversion units="multiplier" expr="x/16" format="0.0000" gauge_min="0" gauge_max="1" gauge_step="0.0625" />
+                    </conversions>
+                </parameter>
+                <parameter id="P91" name="Fine Learning Knock Correction" desc="P91" ecubyteindex="55" ecubit="0" target="1">
+                    <address>0x000199</address>
+                    <conversions>
+                        <conversion units="degrees" expr="(x*0.25)-32" format="0.00" gauge_min="-12" gauge_max="8" gauge_step="1" />
+                    </conversions>
+                </parameter>
+                <parameter id="P200" name="Engine Load (Calculated)" desc="P200-Engine load as calculated from MAF and RPM." target="1">
+                    <depends>
+                        <ref parameter="P8" />
+                        <ref parameter="P12" />
+                    </depends>
+                    <conversions>
+                        <conversion units="g/rev" expr="(P12*60)/P8" format="0.00" />
+                    </conversions>
+                </parameter>
+                <parameter id="P201" name="Injector Duty Cycle" desc="P201-IDC as calculated from RPM and injector PW." target="1">
+                    <depends>
+                        <ref parameter="P8" />
+                        <ref parameter="P21" />
+                    </depends>
+                    <conversions>
+                        <conversion units="%" expr="(P8*P21)/1200" format="0.00" />
+                    </conversions>
+                </parameter>
+                <parameter id="P202" name="Manifold Relative Pressure (Corrected)" desc="P202-Difference between Manifold Absolute Pressure and Atmospheric Pressure." target="1">
+                    <depends>
+                        <ref parameter="P7" />
+                        <ref parameter="P24" />
+                    </depends>
+                    <conversions>
+                        <conversion units="bar" expr="[P7:bar]-[P24:bar]" format="0.000" gauge_min="-2" gauge_max="2" gauge_step="0.4" />
+                        <conversion units="psi" expr="[P7:psi]-[P24:psi]" format="0.00" gauge_min="-30" gauge_max="30" gauge_step="5" />
+                        <conversion units="inHg" expr="[P7:inHg]-[P24:inHg]" format="0.00" gauge_min="-40" gauge_max="60" gauge_step="10" />
+                        <conversion units="mmHg" expr="[P7:mmHg]-[P24:mmHg]" format="0" gauge_min="-1000" gauge_max="2000" gauge_step="300" />
+                    </conversions>
+                </parameter>
+            </parameters>
+            <switches>
+                <switch id="S4" name="Neutral Position Switch" desc="(B) S4" byte="0x000062" bit="7" ecubyteindex="20" target="3" />
+                <switch id="S15" name="Knocking Signal #1" desc="(E) S15" byte="0x000063" bit="2" ecubyteindex="21" target="1" />
+                <switch id="S16" name="Knocking Signal #2" desc="(E) S16" byte="0x000063" bit="1" ecubyteindex="21" target="1" />
+                <switch id="S63" name="Clutch Switch" desc="(E) S63" byte="0x000121" bit="7" ecubyteindex="45" target="1" />
+                <switch id="S67" name="Brake Switch" desc="(E) S67" byte="0x000121" bit="3" ecubyteindex="45" target="1" />
+                <switch id="S68" name="Cruise Control Main Toggle Switch" desc="(E) S68" byte="0x000121" bit="1" ecubyteindex="45" target="1" />
+                <switch id="S79" name="Downshift Switch" desc="(T) S79" byte="0x00006A" bit="4" ecubyteindex="28" target="2" />
+                <switch id="S81" name="Upshift Switch" desc="(T) S81" byte="0x00006A" bit="2" ecubyteindex="28" target="2" />
+            </switches>
+            <ecuparams>
+                <ecuparam id="E1" name="IAM*" desc="E1-KCA = (KA (max) map value * IAM) + FBKC + FLKC. Total Timing = KCA + base timing + timing compensations" target="1">
+                    <ecu id="1B04400405">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="1B04400505">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="1B04400605">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="1B04490305">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="1B04490405">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="1B04490505">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="1B04490605">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="1B04490805">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="1B14400305">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B14400405">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B14400505">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B14400605">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B14400705">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B14400805">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B44580105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B44580405">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B44580505">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B54500405">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="1B54500505">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2344500405">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2354500405">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="23A4500405">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2604446305">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2604446405">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2604446505">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2604446605">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2604686305">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2604686405">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2604686505">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2654786105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2904485005">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="2904495005">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="2904497105">
+                        <address>0x20118</address>
+                    </ecu>
+                    <ecu id="29044A4105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="29044A7105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="29044B6005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="29046B6005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2944594105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2944596105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2954594105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2A04484005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2A04486005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2A44506005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2AA4506005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2D54544005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2E04404005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E04494005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E04496005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E044A6005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E14446006">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E14446106">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E14446206">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E14486006">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E14486106">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E14486206">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E14486306">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E44584105">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E44586005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E44594005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2E44594105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2E44596105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2E54504105">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="2E54594105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="2EA4584005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="3614446105">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3614446205">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3614486105">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3614486205">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3614486305">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3614486405">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3A54504005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3A54584005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3B04484105">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="3D04403005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3D044A4005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3D04594005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3D045B4005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3D04EA4605">
+                        <address>0x2011D</address>
+                    </ecu>
+                    <ecu id="3D44583005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3D44593005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="3D54583005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3D54593005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="3D545B6005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="3DA4583005">
+                        <address>0x20124</address>
+                    </ecu>
+                    <ecu id="3E14444006">
+                        <address>0x20168</address>
+                    </ecu>
+                    <ecu id="3E14483006">
+                        <address>0x20156</address>
+                    </ecu>
+                    <ecu id="3E14484006">
+                        <address>0x20168</address>
+                    </ecu>
+                    <ecu id="3E14486006">
+                        <address>0x20168</address>
+                    </ecu>
+                    <ecu id="4304594005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="43045A4005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <ecu id="43045B4005">
+                        <address>0x20120</address>
+                    </ecu>
+                    <conversions>
+                        <conversion units="raw ecu value" expr="x" format="0" />
+                        <conversion units="multiplier" expr="x/16" format="0.0000" />
+                    </conversions>
+                </ecuparam>
+
+                <ecuparam id="E5" name="Boost Error*" desc="E5-Difference between target boost (post-compensations) and actual boost (target boost - actual boost)" target="1">
+                    <ecu id="1B04400405">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="1B04400505">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="1B04400605">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="1B04490305">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="1B04490405">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="1B04490505">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="1B04490605">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="1B04490805">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="1B14400305">
+                        <address length="2">0x20E0A</address>
+                    </ecu>
+                    <ecu id="1B14400405">
+                        <address length="2">0x20E0A</address>
+                    </ecu>
+                    <ecu id="1B14400505">
+                        <address length="2">0x20E0A</address>
+                    </ecu>
+                    <ecu id="1B14400605">
+                        <address length="2">0x20E0A</address>
+                    </ecu>
+                    <ecu id="1B14400705">
+                        <address length="2">0x20E0A</address>
+                    </ecu>
+                    <ecu id="1B14400805">
+                        <address length="2">0x20E0A</address>
+                    </ecu>
+                    <ecu id="1B44580105">
+                        <address length="2">0x20DFE</address>
+                    </ecu>
+                    <ecu id="1B44580405">
+                        <address length="2">0x20DFE</address>
+                    </ecu>
+                    <ecu id="1B44580505">
+                        <address length="2">0x20DFE</address>
+                    </ecu>
+                    <ecu id="1B54500405">
+                        <address length="2">0x20DFE</address>
+                    </ecu>
+                    <ecu id="1B54500505">
+                        <address length="2">0x20DFE</address>
+                    </ecu>
+                    <ecu id="2344500405">
+                        <address length="2">0x20DFE</address>
+                    </ecu>
+                    <ecu id="2354500405">
+                        <address length="2">0x20DFE</address>
+                    </ecu>
+                    <ecu id="23A4500405">
+                        <address length="2">0x20DFE</address>
+                    </ecu>
+                    <ecu id="2604686505">
+                        <address length="2">0x20E0C</address>
+                    </ecu>
+                    <ecu id="2904485005">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="2904495005">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="2904497105">
+                        <address length="2">0x20CFA</address>
+                    </ecu>
+                    <ecu id="29044A4105">
+                        <address length="2">0x20DEC</address>
+                    </ecu>
+                    <ecu id="29044A7105">
+                        <address length="2">0x20DEC</address>
+                    </ecu>
+                    <ecu id="29044B6005">
+                        <address length="2">0x20DEC</address>
+                    </ecu>
+                    <ecu id="29046B6005">
+                        <address length="2">0x20DEC</address>
+                    </ecu>
+                    <ecu id="2944594105">
+                        <address length="2">0x20DEC</address>
+                    </ecu>
+                    <ecu id="2944596105">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="2954594105">
+                        <address length="2">0x20DEC</address>
+                    </ecu>
+                    <ecu id="2A04484005">
+                        <address length="2">0x20DEC</address>
+                    </ecu>
+                    <ecu id="2A04486005">
+                        <address length="2">0x20DEC</address>
+                    </ecu>
+                    <ecu id="2A44506005">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="2AA4506005">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="2E04404005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E04494005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E04496005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E044A6005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E14446006">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E14446106">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E14446206">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E14486006">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E14486106">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E14486206">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E14486306">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E44584105">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E44586005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E44594005">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="2E44594105">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="2E44596105">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="2E54504105">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="2E54594105">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="2EA4584005">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="3614446105">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3614446205">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3614486105">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3614486205">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3614486305">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3614486405">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3A54504005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3A54584005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3B04484105">
+                        <address length="2">0x20DEC</address>
+                    </ecu>
+                    <ecu id="3D04403005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3D044A4005">
+                        <address length="2">0x20D3C</address>
+                    </ecu>
+                    <ecu id="3D04594005">
+                        <address length="2">0x20D3C</address>
+                    </ecu>
+                    <ecu id="3D045B4005">
+                        <address length="2">0x20D3C</address>
+                    </ecu>
+                    <ecu id="3D44583005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3D44593005">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="3D54583005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3D54593005">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="3D545B6005">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3DA4583005">
+                        <address length="2">0x20E88</address>
+                    </ecu>
+                    <ecu id="3E14444006">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3E14483006">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3E14484006">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="3E14486006">
+                        <address length="2">0x20E1A</address>
+                    </ecu>
+                    <ecu id="4304594005">
+                        <address length="2">0x20D3C</address>
+                    </ecu>
+                    <ecu id="43045A4005">
+                        <address length="2">0x20D3C</address>
+                    </ecu>
+                    <ecu id="43045B4005">
+                        <address length="2">0x20D3C</address>
+                    </ecu>
+                    <conversions>
+                        <conversion units="psi" expr="(x-32768)*.01933677" format="0.00" />
+                        <conversion units="bar" expr="(x-32768)*.001333224" format="0.000" />
+                        <conversion units="mmHg" expr="(x-32768)" format="0" />
+                    </conversions>
+                </ecuparam>
+                <ecuparam id="E11" name="Knock Correction Advance (IAM only)*" desc="E11-Knock Correction Advance (IAM only)" target="1">
+                    <ecu id="1B04400405">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="1B04400505">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="1B04400605">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="1B04490305">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="1B04490405">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="1B04490505">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="1B04490605">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="1B04490805">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="1B14400305">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="1B14400405">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="1B14400505">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="1B14400605">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="1B14400705">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="1B14400805">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="1B44580105">
+                        <address>0x20C1F</address>
+                    </ecu>
+                    <ecu id="1B44580405">
+                        <address>0x20C1F</address>
+                    </ecu>
+                    <ecu id="1B44580505">
+                        <address>0x20C1F</address>
+                    </ecu>
+                    <ecu id="1B54500405">
+                        <address>0x20C1F</address>
+                    </ecu>
+                    <ecu id="1B54500505">
+                        <address>0x20C1F</address>
+                    </ecu>
+                    <ecu id="2344500405">
+                        <address>0x20C1F</address>
+                    </ecu>
+                    <ecu id="2354500405">
+                        <address>0x20C1F</address>
+                    </ecu>
+                    <ecu id="23A4500405">
+                        <address>0x20C1F</address>
+                    </ecu>
+                    <ecu id="2604446305">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="2604446405">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="2604446505">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="2604446605">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="2604686305">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="2604686405">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="2604686505">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="2654786105">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="2904485005">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="2904495005">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="2904497105">
+                        <address>0x20B81</address>
+                    </ecu>
+                    <ecu id="29044A4105">
+                        <address>0x20C15</address>
+                    </ecu>
+                    <ecu id="29044A7105">
+                        <address>0x20C15</address>
+                    </ecu>
+                    <ecu id="29044B6005">
+                        <address>0x20C15</address>
+                    </ecu>
+                    <ecu id="29046B6005">
+                        <address>0x20C15</address>
+                    </ecu>
+                    <ecu id="2944594105">
+                        <address>0x20C15</address>
+                    </ecu>
+                    <ecu id="2944596105">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="2954594105">
+                        <address>0x20C15</address>
+                    </ecu>
+                    <ecu id="2A04484005">
+                        <address>0x20C15</address>
+                    </ecu>
+                    <ecu id="2A04486005">
+                        <address>0x20C15</address>
+                    </ecu>
+                    <ecu id="2A44506005">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="2AA4506005">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="2D54544005">
+                        <address>0x20C2B</address>
+                    </ecu>
+                    <ecu id="2E04404005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E04494005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E04496005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E044A6005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E14446006">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E14446106">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E14446206">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E14486006">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E14486106">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E14486206">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E14486306">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E44584105">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E44586005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E44594005">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="2E44594105">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="2E44596105">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="2E54504105">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="2E54594105">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="2EA4584005">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="3614446105">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3614446205">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3614486105">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3614486205">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3614486305">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3614486405">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3A54504005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3A54584005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3B04484105">
+                        <address>0x20C15</address>
+                    </ecu>
+                    <ecu id="3D04403005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3D044A4005">
+                        <address>0x20B83</address>
+                    </ecu>
+                    <ecu id="3D04594005">
+                        <address>0x20B83</address>
+                    </ecu>
+                    <ecu id="3D045B4005">
+                        <address>0x20B83</address>
+                    </ecu>
+                    <ecu id="3D04EA4605">
+                        <address>0x20B55</address>
+                    </ecu>
+                    <ecu id="3D44583005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3D44593005">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="3D54583005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3D54593005">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="3D545B6005">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3DA4583005">
+                        <address>0x20CAF</address>
+                    </ecu>
+                    <ecu id="3E14444006">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3E14483006">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3E14484006">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="3E14486006">
+                        <address>0x20C61</address>
+                    </ecu>
+                    <ecu id="4304594005">
+                        <address>0x20B83</address>
+                    </ecu>
+                    <ecu id="43045A4005">
+                        <address>0x20B83</address>
+                    </ecu>
+                    <ecu id="43045B4005">
+                        <address>0x20B83</address>
+                    </ecu>
+                    <conversions>
+                        <conversion units="degrees" expr="(x*.3515625)-45" format="0.00" />
+                    </conversions>
+                </ecuparam>
+                <ecuparam id="E12" name="Fine Learning Knock Correction*" desc="E12-Current learned correction that is being applied which is stored and applied across specific load and rpm ranges." target="1">
+                    <ecu id="1B04400405">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="1B04400505">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="1B04400605">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="1B04490305">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="1B04490405">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="1B04490505">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="1B04490605">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="1B04490805">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="1B14400305">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="1B14400405">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="1B14400505">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="1B14400605">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="1B14400705">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="1B14400805">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="1B44580105">
+                        <address>0x20C23</address>
+                    </ecu>
+                    <ecu id="1B44580405">
+                        <address>0x20C23</address>
+                    </ecu>
+                    <ecu id="1B44580505">
+                        <address>0x20C23</address>
+                    </ecu>
+                    <ecu id="1B54500405">
+                        <address>0x20C23</address>
+                    </ecu>
+                    <ecu id="1B54500505">
+                        <address>0x20C23</address>
+                    </ecu>
+                    <ecu id="2344500405">
+                        <address>0x20C23</address>
+                    </ecu>
+                    <ecu id="2354500405">
+                        <address>0x20C23</address>
+                    </ecu>
+                    <ecu id="23A4500405">
+                        <address>0x20C23</address>
+                    </ecu>
+                    <ecu id="2604446305">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="2604446405">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="2604446505">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="2604446605">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="2604686305">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="2604686405">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="2604686505">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="2654786105">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="2904485005">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="2904495005">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="2904497105">
+                        <address>0x20B85</address>
+                    </ecu>
+                    <ecu id="29044A4105">
+                        <address>0x20C19</address>
+                    </ecu>
+                    <ecu id="29044A7105">
+                        <address>0x20C19</address>
+                    </ecu>
+                    <ecu id="29044B6005">
+                        <address>0x20C19</address>
+                    </ecu>
+                    <ecu id="29046B6005">
+                        <address>0x20C19</address>
+                    </ecu>
+                    <ecu id="2944594105">
+                        <address>0x20C19</address>
+                    </ecu>
+                    <ecu id="2944596105">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="2954594105">
+                        <address>0x20C19</address>
+                    </ecu>
+                    <ecu id="2A04484005">
+                        <address>0x20C19</address>
+                    </ecu>
+                    <ecu id="2A04486005">
+                        <address>0x20C19</address>
+                    </ecu>
+                    <ecu id="2A44506005">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="2AA4506005">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="2D54544005">
+                        <address>0x20C2F</address>
+                    </ecu>
+                    <ecu id="2E04404005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E04494005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E04496005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E044A6005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E14446006">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E14446106">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E14446206">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E14486006">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E14486106">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E14486206">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E14486306">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E44584105">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E44586005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E44594005">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="2E44594105">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="2E44596105">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="2E54504105">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="2E54594105">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="2EA4584005">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="3614446105">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3614446205">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3614486105">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3614486205">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3614486305">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3614486405">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3A54504005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3A54584005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3B04484105">
+                        <address>0x20C19</address>
+                    </ecu>
+                    <ecu id="3D04403005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3D044A4005">
+                        <address>0x20B87</address>
+                    </ecu>
+                    <ecu id="3D04594005">
+                        <address>0x20B87</address>
+                    </ecu>
+                    <ecu id="3D045B4005">
+                        <address>0x20B87</address>
+                    </ecu>
+                    <ecu id="3D04EA4605">
+                        <address>0x20B59</address>
+                    </ecu>
+                    <ecu id="3D44583005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3D44593005">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="3D54583005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3D54593005">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="3D545B6005">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3DA4583005">
+                        <address>0x20CB3</address>
+                    </ecu>
+                    <ecu id="3E14444006">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3E14483006">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3E14484006">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="3E14486006">
+                        <address>0x20C65</address>
+                    </ecu>
+                    <ecu id="4304594005">
+                        <address>0x20B87</address>
+                    </ecu>
+                    <ecu id="43045A4005">
+                        <address>0x20B87</address>
+                    </ecu>
+                    <ecu id="43045B4005">
+                        <address>0x20B87</address>
+                    </ecu>
+                    <conversions>
+                        <conversion units="degrees" expr="(x*.3515625)-45" format="0.00" />
+                    </conversions>
+                </ecuparam>
+                <ecuparam id="E20" name="Manifold Absolute Pressure (Direct)*" desc="E20-Manifold Absolute Pressure with no effective limit." target="1">
+                    <ecu id="1B04400405">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="1B04400505">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="1B04400605">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="1B04490305">
+                        <address length="2">0x2186C</address>
+                    </ecu>
+                    <ecu id="1B04490405">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="1B04490505">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="1B04490605">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="1B04490805">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="1B14400305">
+                        <address length="2">0x219E2</address>
+                    </ecu>
+                    <ecu id="1B14400405">
+                        <address length="2">0x219E2</address>
+                    </ecu>
+                    <ecu id="1B14400505">
+                        <address length="2">0x219E2</address>
+                    </ecu>
+                    <ecu id="1B14400605">
+                        <address length="2">0x219E2</address>
+                    </ecu>
+                    <ecu id="1B14400705">
+                        <address length="2">0x219E2</address>
+                    </ecu>
+                    <ecu id="1B14400805">
+                        <address length="2">0x219E2</address>
+                    </ecu>
+                    <ecu id="1B44580105">
+                        <address length="2">0x21998</address>
+                    </ecu>
+                    <ecu id="1B44580405">
+                        <address length="2">0x21998</address>
+                    </ecu>
+                    <ecu id="1B44580505">
+                        <address length="2">0x21998</address>
+                    </ecu>
+                    <ecu id="1B54500405">
+                        <address length="2">0x21998</address>
+                    </ecu>
+                    <ecu id="1B54500505">
+                        <address length="2">0x21998</address>
+                    </ecu>
+                    <ecu id="2344500405">
+                        <address length="2">0x21998</address>
+                    </ecu>
+                    <ecu id="2354500405">
+                        <address length="2">0x21998</address>
+                    </ecu>
+                    <ecu id="23A4500405">
+                        <address length="2">0x21998</address>
+                    </ecu>
+                    <ecu id="2604446305">
+                        <address length="2">0x218E4</address>
+                    </ecu>
+                    <ecu id="2604446405">
+                        <address length="2">0x218E6</address>
+                    </ecu>
+                    <ecu id="2604446505">
+                        <address length="2">0x218E6</address>
+                    </ecu>
+                    <ecu id="2604446605">
+                        <address length="2">0x218E6</address>
+                    </ecu>
+                    <ecu id="2604686305">
+                        <address length="2">0x218E4</address>
+                    </ecu>
+                    <ecu id="2604686405">
+                        <address length="2">0x218E6</address>
+                    </ecu>
+                    <ecu id="2604686505">
+                        <address length="2">0x218E6</address>
+                    </ecu>
+                    <ecu id="2654786105">
+                        <address length="2">0x218E4</address>
+                    </ecu>
+                    <ecu id="2904485005">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="2904495005">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="2904497105">
+                        <address length="2">0x2186A</address>
+                    </ecu>
+                    <ecu id="29044A4105">
+                        <address length="2">0x20092</address>
+                    </ecu>
+                    <ecu id="29044A7105">
+                        <address length="2">0x20092</address>
+                    </ecu>
+                    <ecu id="29044B6005">
+                        <address length="2">0x20092</address>
+                    </ecu>
+                    <ecu id="29046B6005">
+                        <address length="2">0x20092</address>
+                    </ecu>
+                    <ecu id="2944594105">
+                        <address length="2">0x20092</address>
+                    </ecu>
+                    <ecu id="2944596105">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="2954594105">
+                        <address length="2">0x20092</address>
+                    </ecu>
+                    <ecu id="2A04484005">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="2A04486005">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="2A44506005">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="2AA4506005">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="2D54544005">
+                        <address length="2">0x218E6</address>
+                    </ecu>
+                    <ecu id="2E04404005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E04494005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E04496005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E044A6005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E14446006">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E14446106">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E14446206">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E14486006">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E14486106">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E14486206">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E14486306">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E44584105">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E44586005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E44594005">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="2E44594105">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="2E44596105">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="2E54504105">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="2E54594105">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="2EA4584005">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="3614446105">
+                        <address length="2">0x200B6</address>
+                    </ecu>
+                    <ecu id="3614446205">
+                        <address length="2">0x200B6</address>
+                    </ecu>
+                    <ecu id="3614486105">
+                        <address length="2">0x200B6</address>
+                    </ecu>
+                    <ecu id="3614486205">
+                        <address length="2">0x200B6</address>
+                    </ecu>
+                    <ecu id="3614486305">
+                        <address length="2">0x200B6</address>
+                    </ecu>
+                    <ecu id="3614486405">
+                        <address length="2">0x200B6</address>
+                    </ecu>
+                    <ecu id="3A54504005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="3A54584005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="3B04484105">
+                        <address length="2">0x200AC</address>
+                    </ecu>
+                    <ecu id="3D04403005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="3D044A4005">
+                        <address length="2">0x200EA</address>
+                    </ecu>
+                    <ecu id="3D04594005">
+                        <address length="2">0x200EA</address>
+                    </ecu>
+                    <ecu id="3D045B4005">
+                        <address length="2">0x200EA</address>
+                    </ecu>
+                    <ecu id="3D04EA4605">
+                        <address length="2">0x200EA</address>
+                    </ecu>
+                    <ecu id="3D44583005">
+                        <address length="2">0x200EC</address>
+                    </ecu>
+                    <ecu id="3D44593005">
+                        <address length="2">0x200D0</address>
+                    </ecu>
+                    <ecu id="3D54583005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="3D54593005">
+                        <address length="2">0x200D0</address>
+                    </ecu>
+                    <ecu id="3D545B6005">
+                        <address length="2">0x200E6</address>
+                    </ecu>
+                    <ecu id="3DA4583005">
+                        <address length="2">0x200D0</address>
+                    </ecu>
+                    <ecu id="3E14444006">
+                        <address length="2">0x200EC</address>
+                    </ecu>
+                    <ecu id="3E14483006">
+                        <address length="2">0x200EC</address>
+                    </ecu>
+                    <ecu id="3E14484006">
+                        <address length="2">0x200EC</address>
+                    </ecu>
+                    <ecu id="3E14486006">
+                        <address length="2">0x200EC</address>
+                    </ecu>
+                    <ecu id="4304594005">
+                        <address length="2">0x200EA</address>
+                    </ecu>
+                    <ecu id="43045A4005">
+                        <address length="2">0x200EA</address>
+                    </ecu>
+                    <ecu id="43045B4005">
+                        <address length="2">0x200EA</address>
+                    </ecu>
+                    <conversions>
+                        <conversion units="kPa absolute" expr="x*0.1333224" format="0.00" />
+                        <conversion units="psi absolute" expr="x*0.01933677" format="0.00" />
+                        <conversion units="bar absolute" expr="x*0.001333224" format="0.000" />
+                        <conversion units="mmHg absolute" expr="x" format="0" />
+                        <conversion units="inHg absolute" expr="x*0.03937" format="0.00" />
+                    </conversions>
+                </ecuparam>
+                <ecuparam id="E25" name="Gear (Calculated)*" desc="E25-Current manual transmission gear selection as estimated by the ECU based on vehicle speed and RPM." target="1">
+                    <ecu id="1B04400405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B04400505">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B04400605">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B04490305">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B04490405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B04490505">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B04490605">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B04490805">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B14400305">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B14400405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B14400505">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B14400605">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B14400705">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B14400805">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B44580105">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B44580405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B44580505">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B54500405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="1B54500505">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2344500405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2354500405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="23A4500405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2604446305">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2604446405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2604446505">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2604446605">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2604686305">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2604686405">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2604686505">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2654786105">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2904485005">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2904495005">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2904497105">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="29044A4105">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="29044A7105">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="29044B6005">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="29046B6005">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2944594105">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2944596105">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="2954594105">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2A04484005">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2A04486005">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2A44506005">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="2AA4506005">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="2D54544005">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="2E04404005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E04494005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E04496005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E044A6005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E14446006">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E14446106">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E14446206">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E14486006">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E14486106">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E14486206">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E14486306">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E44584105">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E44586005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E44594005">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="2E44594105">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="2E44596105">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="2E54504105">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="2E54594105">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="2EA4584005">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="3614446105">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3614446205">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3614486105">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3614486205">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3614486305">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3614486405">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3A54504005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3A54584005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3B04484105">
+                        <address>0x20963</address>
+                    </ecu>
+                    <ecu id="3D04403005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3D044A4005">
+                        <address>0x208DD</address>
+                    </ecu>
+                    <ecu id="3D04594005">
+                        <address>0x208DD</address>
+                    </ecu>
+                    <ecu id="3D045B4005">
+                        <address>0x208DD</address>
+                    </ecu>
+                    <ecu id="3D04EA4605">
+                        <address>0x208DE</address>
+                    </ecu>
+                    <ecu id="3D44583005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3D44593005">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="3D54583005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3D54593005">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="3D545B6005">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3DA4583005">
+                        <address>0x209FD</address>
+                    </ecu>
+                    <ecu id="3E14444006">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3E14483006">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3E14484006">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="3E14486006">
+                        <address>0x209C7</address>
+                    </ecu>
+                    <ecu id="4304594005">
+                        <address>0x208DD</address>
+                    </ecu>
+                    <ecu id="43045A4005">
+                        <address>0x208DD</address>
+                    </ecu>
+                    <ecu id="43045B4005">
+                        <address>0x208DD</address>
+                    </ecu>
+                    <conversions>
+                        <conversion units="position" expr="x" format="0" />
+                    </conversions>
+                </ecuparam>
+            </ecuparams>
+        </protocol>
+    </protocols>
+</logger>

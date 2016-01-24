@@ -29,9 +29,11 @@ class PMXmlParser(xml.sax.ContentHandler):
         self._parameters = set()
         self._parameter = None
         self._element_no = 0
+        self._inExtended = False
+        self._extendedMatch = False
         
         self._message = "Parsing XML data"
-        source = open(os.path.join("../SSM/data", file_name))
+        source = open(os.path.join("./", file_name))
         xml.sax.parse(source, self)
         
         return self._parameters
@@ -40,7 +42,7 @@ class PMXmlParser(xml.sax.ContentHandler):
     Override to make sure we parse the romraider xml properly
     """
     def startElement(self, name, attrs):
-        if name == "parameter":
+        if name == "parameter" or name == "ecuparam":
             # set optional arguments
             byte_index = "none"
             bit_index = "none"
@@ -60,7 +62,16 @@ class PMXmlParser(xml.sax.ContentHandler):
                     target = int(v)
 
             self._parameter = PMParameter(pid, name, desc, byte_index, bit_index, target)
-                          
+
+            if name == "ecuparam":
+                self._inExtended = True
+
+        if name == "ecu":
+            for (k,v) in attrs.items():
+                if k == "id":
+                    if v == self._ecuid:
+                        self._foundExtended = True;
+
         if name == "address":
             self._addrlen = 1
             for (k,v) in attrs.items():
@@ -94,7 +105,13 @@ class PMXmlParser(xml.sax.ContentHandler):
     """
     def characters(self, content):
         if len(content.strip()) > 0 and self._name == "address" and self._parameter != None:
-            self._parameter.set_address(int(content, 16), self._addrlen)
+            if self._foundExtended:
+                if self._extendedMatch:
+                    self._parameter.set_address(int(content, 16), self._addrlen)
+                    self._extendedMatch = False
+            else:
+                self._parameter.set_address(int(content, 16), self._addrlen)
+
 
     """
     Override to make sure we parse the romraider xml properly
@@ -104,6 +121,10 @@ class PMXmlParser(xml.sax.ContentHandler):
             self._parameters.add(self._parameter)
             self._parameter = None
             self._addrlen = None
+
+        if name == "ecuparam":
+            self._foundExtended = False
+            self._extendedMatch = False
              
         if name == "address":
             self._addrlen = 0

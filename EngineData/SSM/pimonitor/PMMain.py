@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     supported_parameters = []
 	
-    defined_parameters = parser.parse("logger_METRIC_EN_v131.xml")	
+    defined_parameters = parser.parse("logger_METRIC_Condensed_v131.xml")
 
     connection = PMConnection()
 
