@@ -9,7 +9,8 @@ Created on 29-03-2013
 import xml.sax
 import os.path
 
-from PMSwitch import PMSwitch
+from EngineData.SSM.pimonitor import PMSwitch
+
 
 # TODO: dependencies
 # TODO: ecuparams

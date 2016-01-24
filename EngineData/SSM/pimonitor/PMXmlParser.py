@@ -7,8 +7,8 @@ Created on 29-03-2013
 import xml.sax
 import os.path
 
-from PM import PM
-from PMParameter import PMParameter
+from EngineData.SSM.pimonitor import PMParameter
+
 
 # TODO: dependencies
 # TODO: ecuparams

@@ -21,6 +21,6 @@ class Config():
         self.__parser.set('RpmThresholds', 'red', '5500')
         self.__parser.set('RpmThresholds', 'blue', '6500')
 
-        with open('config.ini', 'wb') as configFile:
+        with open('./Util/config.ini', 'wb') as configFile:
             self.__parser.write(configFile)
 
