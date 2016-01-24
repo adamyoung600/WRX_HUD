@@ -1,8 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE logger SYSTEM "logger.dtd">
-<!--ROMRAIDER METRIC UNITS LOGGER DEFINITION FILE (VERSION 131) 20130306_231448 [en]
-
-<logger version="131">
+﻿<logger version="131">
     <protocols>
         <protocol id="SSM" baud="4800" databits="8" stopbits="1" parity="0" connect_timeout="2000" send_timeout="55">
             <parameters>

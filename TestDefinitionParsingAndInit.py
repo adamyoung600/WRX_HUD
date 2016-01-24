@@ -1,9 +1,9 @@
 import traceback
 import time
 
-from SSM.pimonitor.PMConnection import PMConnection
-from SSM.pimonitor.PMXmlParser import PMXmlParser
-from EngineData.SSM.pimonitor import PMSwitchParser
+from EngineData.SSM.pimonitor.PMConnection import PMConnection
+from EngineData.SSM.pimonitor.PMXmlParser import PMXmlParser
+from EngineData.SSM.pimonitor.PMSwitchParser import PMSwitchParser
 
 
 if __name__=="__main__":
@@ -11,9 +11,16 @@ if __name__=="__main__":
     switchParser = PMSwitchParser()
     supported_parameters = []
     supported_switches = []
-    print "starting parse"
-    defined_parameters = parser.parse("logger_METRIC_EN_v131.xml")
-    defined_switches = switchParser.parse("logger_METRIC_EN_v131.xml")
+
+    print "starting parse of parameters"
+    defined_parameters = parser.parse("logger_METRIC_Condensed_v131.xml")
+    print "============================="
+    for i in defined_parameters:
+        print i.to_string()
+
+    print "starting parse of switches"
+    defined_switches = switchParser.parse("logger_METRIC_Condensed_v131.xml")
+    print "============================="
     for i in defined_switches:
         print i.to_string()
 

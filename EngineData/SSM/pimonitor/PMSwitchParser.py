@@ -9,7 +9,7 @@ Created on 29-03-2013
 import xml.sax
 import os.path
 
-from EngineData.SSM.pimonitor import PMSwitch
+from EngineData.SSM.pimonitor.PMSwitch import PMSwitch
 
 
 # TODO: dependencies
@@ -33,7 +33,7 @@ class PMSwitchParser(xml.sax.ContentHandler):
         self._element_no = 0
 
         self._message = "Parsing XML data"
-        source = open(os.path.join("../SSM/data", file_name))
+        source = open(os.path.join("./EngineData/SSM/pimonitor/", file_name))
         xml.sax.parse(source, self)
 
         return self._switches

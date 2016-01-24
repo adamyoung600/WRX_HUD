@@ -7,7 +7,7 @@ Created on 29-03-2013
 import xml.sax
 import os.path
 
-from EngineData.SSM.pimonitor import PMParameter
+from EngineData.SSM.pimonitor.PMParameter import PMParameter
 
 
 # TODO: dependencies
@@ -31,9 +31,12 @@ class PMXmlParser(xml.sax.ContentHandler):
         self._element_no = 0
         self._inExtended = False
         self._extendedMatch = False
+        self._ecuid = "1B04400405"
         
         self._message = "Parsing XML data"
-        source = open(os.path.join("./", file_name))
+
+        source = open(os.path.join("./EngineData/SSM/pimonitor/", file_name))
+
         xml.sax.parse(source, self)
         
         return self._parameters
@@ -47,11 +50,14 @@ class PMXmlParser(xml.sax.ContentHandler):
             byte_index = "none"
             bit_index = "none"
 
+            if name == "ecuparam":
+                self._inExtended = True
+
             for (k,v) in attrs.items():
                 if k == "id":
                     pid = v
                 if k == "name":
-                    name = v
+                    param_name = v
                 if k == "desc":
                     desc = v
                 if k == "ecubyteindex":
@@ -61,16 +67,13 @@ class PMXmlParser(xml.sax.ContentHandler):
                 if k == "target":
                     target = int(v)
 
-            self._parameter = PMParameter(pid, name, desc, byte_index, bit_index, target)
-
-            if name == "ecuparam":
-                self._inExtended = True
+            self._parameter = PMParameter(pid, param_name, desc, byte_index, bit_index, target)
 
         if name == "ecu":
             for (k,v) in attrs.items():
                 if k == "id":
                     if v == self._ecuid:
-                        self._foundExtended = True;
+                        self._extendedMatch = True;
 
         if name == "address":
             self._addrlen = 1
@@ -105,7 +108,7 @@ class PMXmlParser(xml.sax.ContentHandler):
     """
     def characters(self, content):
         if len(content.strip()) > 0 and self._name == "address" and self._parameter != None:
-            if self._foundExtended:
+            if self._inExtended:
                 if self._extendedMatch:
                     self._parameter.set_address(int(content, 16), self._addrlen)
                     self._extendedMatch = False
@@ -122,8 +125,11 @@ class PMXmlParser(xml.sax.ContentHandler):
             self._parameter = None
             self._addrlen = None
 
-        if name == "ecuparam":
-            self._foundExtended = False
+        if name == "ecuparam" and self._extendedMatch:
+            self._parameters.add(self._parameter)
+            self._parameter = None
+            self._addrlen = None
+            self._inExtended = False
             self._extendedMatch = False
              
         if name == "address":
