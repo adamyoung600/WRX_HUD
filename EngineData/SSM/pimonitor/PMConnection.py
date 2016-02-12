@@ -2,6 +2,8 @@
 Created on 29-03-2013
 
 @author: citan
+
+Feb. 2016 - Updated by Adam Young to work with the specifics of the raspberry pi being used in the wrx project.
 '''
 import serial
 import time

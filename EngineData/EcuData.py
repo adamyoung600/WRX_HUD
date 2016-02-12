@@ -1,4 +1,7 @@
-__author__ = 'Adam'
+'''
+Feb 2016
+@author: Adam Young
+'''
 
 import time
 
@@ -99,4 +102,4 @@ class EcuData():
     ####################################################"""
 
 
-    def getGearRatio(self):
+    #def getGearRatio(self):

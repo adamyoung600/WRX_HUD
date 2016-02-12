@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 '''
 Created on 29-03-2013
 
@@ -41,7 +39,7 @@ if __name__ == '__main__':
 						
             if ecu_packet == None or tcu_packet == None:
                 print "Can't get initial data."
-                continue;
+                continue
 
             #Match the defined parameters against which ones are in teh ecu/tcu supported parameters
             for p in defined_parameters:
@@ -55,7 +53,7 @@ if __name__ == '__main__':
                         supported_parameters.append(p)
 
             for p in defined_parameters:
-                p_deps = p.get_dependencies();
+                p_deps = p.get_dependencies()
                 if not p_deps:
                     continue
 
@@ -83,35 +81,29 @@ if __name__ == '__main__':
             for p in supported_parameters:
                 print p.to_string()
 
+			for p in supported_parameters:
+				window = PMSingleWindow(p)
+				screen.add_window(window)
+
+			while True:
+				window = screen.get_window()
+				param = window.get_parameter()
+				parameters = param.get_parameters()
+				if parameters:
+					packets = connection.read_parameters(parameters)
+					window.set_packets(packets)
+				else:
+					packet = connection.read_parameter(param)
+					window.set_packets([packet])
 
 
+				screen.render()
 
+		except IOError as e:
+			PM.log('I/O error: {0} {1}'.format(e.errno, e.strerror), log_id)
+			if connection != None:
+				connection.close()
+				time.sleep(3)
+			continue
 
-
-
-	# 		for p in supported_parameters:
-	# 			window = PMSingleWindow(p)
-	# 			screen.add_window(window)
-    #
-	# 		while True:
-	# 			window = screen.get_window()
-	# 			param = window.get_parameter()
-	# 			parameters = param.get_parameters()
-	# 			if parameters:
-	# 				packets = connection.read_parameters(parameters)
-	# 				window.set_packets(packets)
-	# 			else:
-	# 				packet = connection.read_parameter(param)
-	# 				window.set_packets([packet])
-	#
-    #
-	# 			screen.render()
-    #
-	# 	except IOError as e:
-	# 		PM.log('I/O error: {0} {1}'.format(e.errno, e.strerror), log_id)
-	# 		if connection != None:
-	# 			connection.close()
-	# 			time.sleep(3)
-	# 		continue
-    #
-	# screen.close()
+	screen.close()

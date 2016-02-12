@@ -2,6 +2,9 @@
 Created on 29-03-2013
 
 @author: citan
+
+Feb. 2016 - Updated by Adam Young to allow it to also parse extended ecu parameters.
+
 '''
 
 import xml.sax

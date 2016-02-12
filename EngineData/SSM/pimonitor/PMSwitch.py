@@ -1,4 +1,7 @@
-__author__ = 'Adam'
+'''
+Feb 2016
+@author: Adam Young
+'''
 
 import re
 
