@@ -5,129 +5,54 @@
 import traceback
 import time
 
-from SSM.pimonitor.PMConnection import PMConnection
-from SSM.pimonitor.PMXmlParser import PMXmlParser
+from EngineData.SSM.pimonitor.PMConnection import PMConnection
+from EngineData.SSM.pimonitor.PMXmlParser import PMXmlParser
+from Hardware.Input.Keyboard import Keyboard
+from MenuSystem.MenuManager import MenuManager
 
 
-"""
-Used to sample the gear ratio in the car.  Testing purposes.
-"""
-if __name__=="__main__":
-    parser = PMXmlParser()
-    supported_parameters = []
-    print "starting parse"
-    defined_parameters = parser.parse("logger_METRIC_EN_v131.xml")
-    print "finished parse"
-    connection = PMConnection()
+class HUDMain():
 
-    init_finished = False
+    def __init__(self):
 
-    while not init_finished:
-        try:
-            connection.open()
-            #Query ecu/tcu to see which parameters are supported.
-            ecu_packet = connection.init(1)
-            tcu_packet = connection.init(2)
+        self._keyboard = Keyboard()
+        self._menuManager = MenuManager()
+        self._menuMode = False
 
-            if ecu_packet == None or tcu_packet == None:
-                print "Can't get initial data."
-                continue
+    def mainLoop(self):
+        pass
 
-            #Match the defined parameters against which ones are in teh ecu/tcu supported parameters
-            for p in defined_parameters:
-                if (p.get_target() & 0x1 == 0x1) and p.is_supported(ecu_packet.to_bytes()[5:]):
-                    if not filter(lambda x: x.get_id() == p.get_id(), supported_parameters):
-                        supported_parameters.append(p)
+    ##########################################
+    #Keyboard input handling
+    ##########################################
+    def checkForKeyboardInput(self):
+        input_val = self._keyboard.getChar()
 
-            for p in defined_parameters:
-                if ((p.get_target() & 0x2 == 0x2) or (p.get_target() & 0x1 == 0x1)) and p.is_supported(tcu_packet.to_bytes()[5:]):
-                    if not filter(lambda x: x.get_id() == p.get_id(), supported_parameters):
-                        supported_parameters.append(p)
+        if self._menuMode == False and input_val != None:
+            self.menuMode = True
+            return
 
-            for p in defined_parameters:
-                p_deps = p.get_dependencies()
-                if not p_deps:
-                    continue
+        if input_val == 'w':
+            self.upButtonCallback()
+        elif input_val == 's':
+            self.downButtonCallback()
+        elif input_val == 'p':
+            self.setButtonCallback()
+        elif input_val == 'o':
+            self.backButtonCallback()
 
-                deps_found = ()
-                for dep in p_deps:
-                    deps_found = filter(lambda x: x.get_id() == dep, supported_parameters)
-                    if not deps_found:
-                        break
+    def setMenuMode(self, enableMenuMode):
+        self._menuMode = enableMenuMode
 
-                    if len(deps_found) > 1:
-                        raise Exception('duplicated dependencies', deps_found)
+    def upButtonCallback(self):
+        self._menuManager.upButtonCallback()
 
-                    p.add_parameter(deps_found[0])
+    def downButtonCallback(self):
+        self._menuManager.downButtonCallback()
 
-                if deps_found:
-                    supported_parameters.append(p)
+    def setButtonCallback(self):
+        self._menuManager.setButtonCallback()
 
-            # each ID must be in a form P01 - first letter, then a number
-            supported_parameters.sort(key=lambda p: int(p.get_id()[1:]), reverse=False)
-
-            paramFile = open("supportedParameters","w")
-            print "==================================="
-            print "Supported Parameters Below:"
-            print "==================================="
-            #Print out the supported parameters
-            for p in supported_parameters:
-                paramFile.write(p.to_string())
-                paramFile.write('\n')
-
-            init_finished = True
-
-        except IOError as e:
-            traceback.print_exc()
-            print "I/O error: {0} {1}".format(e.errno, e.strerror)
-
-            if connection != None:
-                connection.close()
-                time.sleep(3)
-            continue
-    """
-    P8 - engine rpm
-    P9 - Vehicle speed
-    """
-    print "initialized connection"
-    rpmParameter = 0
-    wheelSpeedParameter = 0
-    for p in supported_parameters:
-        if p.get_id() == "P8":
-            print "found rpm"
-            rpmParameter = p
-        elif p.get_id() == "P9":
-            print "found speed"
-            wheelSpeedParameter = p
-
-    #loop and qeury the data
-    file = open("output.txt","w")
-    file.write("RPM, Speed, GearRatio")
-    while True:
-
-        #Update rpm
-        rpmPacket = connection.read_parameter(rpmParameter)
-        rpmString = rpmParameter.get_value(rpmPacket)
-        #Update wheel speed
-        speedPacket = connection.read_parameter(wheelSpeedParameter)
-        speedString = wheelSpeedParameter.get_value(speedPacket)
-
-        #Update Gear Ratio
-        if float(speedString) >0:
-            gearRatio = float(rpmString)/float(speedString)
-            gearRatioString = str(gearRatio)
-
-            totalString = rpmString+", "+speedString+", "+gearRatioString
-            print totalString
-            file.write(totalString+'\n')
-
-        #Pad out the string
-        # if len(rpmString) < 4:
-        #     for i in range(0, 3-len(rpmString)):
-        #         rpmString = " " + rpmString
-        # rpmDisplay.sendString(rpmString, 0, 0)
-
-        time.sleep(0.05)
-
-    connection.close()
+    def backButtonCallback(self):
+        self._menuManager.backButtonCallback()
 

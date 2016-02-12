@@ -10,6 +10,7 @@ class Keyboard():
     def getChar(self):
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
+        ch = None
         try:
             tty.setraw(fd)
             ch = sys.stdin.read(1)

@@ -12,15 +12,17 @@ class EcuData():
 
     def __init__(self):
         #Create connection to the ECU using SSM protocol
-        parser = PMXmlParser()
+        ecuid = "1B04400405" #TODO: replace this with a call to query the ecu id.
+        parser = PMXmlParser(ecuid)
         self.supported_parameters = []
-        self.defined_parameters = parser.parse("logger_METRIC_EN_v131.xml")
+        self.defined_parameters = parser.parse("logger_METRIC_Condensed_v131.xml")
         self.connection = PMConnection()
         self.__initConnection__()
         #Init core parameters
         self.coreParametersReady = False
         self.wheelSpeedParameter = None
         self.engineSpeedParameter = None
+        self.monitoredParameters = None
         self
 
         self.__initCoreParameters()
@@ -102,4 +104,6 @@ class EcuData():
     ####################################################"""
 
 
-    #def getGearRatio(self):
+    #def getCurrentGearRatio(self):
+
+    #def
