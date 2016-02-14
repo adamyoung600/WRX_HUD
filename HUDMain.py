@@ -7,8 +7,10 @@ import time
 
 from EngineData.SSM.pimonitor.PMConnection import PMConnection
 from EngineData.SSM.pimonitor.PMXmlParser import PMXmlParser
+from GearIndicator import GearIndicator
 from Hardware.Input.Keyboard import Keyboard
 from MenuSystem.MenuManager import MenuManager
+from Util.Config import Config
 
 
 class HUDMain():
@@ -17,28 +19,50 @@ class HUDMain():
 
         self._keyboard = Keyboard()
         self._menuManager = MenuManager()
+        self._gearIndicator = GearIndicator()
+
+
         self._menuMode = False
+
+        # Read in config from the file system.
+        self.__monitoredParamIDs = None
+        self.__rpmThresholds == None
+        self._loadConfig()
+
+
+
 
     def mainLoop(self):
         pass
+        # Query monitored parameters and update data display
+
+
+    def _loadConfig(self):
+        if self.__config == None:
+            self.__config = Config()
+        self.__monitoredParamIDs = self.__config.getMonitoredParams()
+        self.__rpmThresholds = self.__config.getRpmThresholds()
+
+    def calculateGear(self, engineSpeed, vehicleSpeed):
+        pass
 
     ##########################################
-    #Keyboard input handling
+    # Keyboard input handling
     ##########################################
     def checkForKeyboardInput(self):
-        input_val = self._keyboard.getChar()
+        inputVal = self._keyboard.getChar()
 
-        if self._menuMode == False and input_val != None:
+        if self._menuMode == False and inputVal != None:
             self.menuMode = True
             return
 
-        if input_val == 'w':
+        if inputVal == 'w':
             self.upButtonCallback()
-        elif input_val == 's':
+        elif inputVal == 's':
             self.downButtonCallback()
-        elif input_val == 'p':
+        elif inputVal == 'p':
             self.setButtonCallback()
-        elif input_val == 'o':
+        elif inputVal == 'o':
             self.backButtonCallback()
 
     def setMenuMode(self, enableMenuMode):
