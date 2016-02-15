@@ -11,6 +11,8 @@ from GearIndicator import GearIndicator
 from Hardware.Input.Keyboard import Keyboard
 from MenuSystem.MenuManager import MenuManager
 from Util.Config import Config
+from EngineData.EcuData import EcuData
+from DataDisplay import DataDisplay
 
 
 class HUDMain():
@@ -20,13 +22,15 @@ class HUDMain():
         self._keyboard = Keyboard()
         self._menuManager = MenuManager()
         self._gearIndicator = GearIndicator()
+        self._dataDisplay = DataDisplay()
+        self._ecu = EcuData()
 
 
         self._menuMode = False
 
         # Read in config from the file system.
-        self.__monitoredParamIDs = None
-        self.__rpmThresholds == None
+        self._monitoredParamIDs = None
+        self._rpmThresholds == None
         self._loadConfig()
 
 
@@ -35,13 +39,17 @@ class HUDMain():
     def mainLoop(self):
         pass
         # Query monitored parameters and update data display
+        monitoredValues = self._ecu.getMonitoredParams()
+        self._dataDisplay.update(monitoredValues)
 
 
     def _loadConfig(self):
-        if self.__config == None:
-            self.__config = Config()
-        self.__monitoredParamIDs = self.__config.getMonitoredParams()
-        self.__rpmThresholds = self.__config.getRpmThresholds()
+        if self._config == None:
+            self._config = Config()
+        self._monitoredParamIDs = self._config.getMonitoredParams()
+        self._rpmThresholds = self._config.getRpmThresholds()
+        self._ecu.setMonitoredParams(self._monitoredParamIDs)
+
 
     def calculateGear(self, engineSpeed, vehicleSpeed):
         pass

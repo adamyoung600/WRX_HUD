@@ -92,6 +92,20 @@ class EcuData():
                     time.sleep(3)
                 continue
 
+    def setMonitoredParams(self, paramIDs):
+        for id in paramIDs:
+            for p in self.supported_parameters:
+                if p.get_id() == id:
+                    self.monitoredParameters.append(p)
+
+    def getMonitoredParams(self):
+        packets = self.connection.read_parameters(self.monitoredParameters)
+        currentValues = []
+        for i in range(len(packets)):
+            currentValues.append(self.monitoredParameters[i].get_value(packets[i]))
+        return currentValues
+
+
     def __initCoreParameters__(self):
         pass
 
