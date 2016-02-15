@@ -154,12 +154,30 @@ class WideHKOLED():
         row - The row on which to begin printing the string (0 is upper, 1 is lower)
         col - the position within the row to start printing the string (0 to 15)
     
-    Sends a string to the lcd to be displaced at the cursor position indicated
+    Sends a string to the lcd to be placed at the cursor position indicated
     """
-    
     def sendString(self, text, row, col):
         #TODO: error checking to make sure the text will either wrap or not accept something that's too long.
         self.setCursorPosition(row, col)
+        for char in text:
+            self.__sendData(int(hex(ord(char)), 16))
+
+    """
+    sendStringByEnd(text, row, colEndPosition)
+
+        text - The string that you want to display
+        row - The row on which to begin printing the string (0 is upper, 1 is lower)
+        colEndPosition - The position on which the last character of the string should appear
+
+    Sends a string to the lcd placing the LAST character of the string at the indicated position.
+    """
+    def sendStringByEnd(self, text, row, colEndPosition):
+        if len(text) > colEndPosition+1:
+            self.setCursorPosition(row, 0)
+            text = text[:4]
+        else:
+            self.setCursorPosition(row, colEndPosition-len(text))
+
         for char in text:
             self.__sendData(int(hex(ord(char)), 16))
 
