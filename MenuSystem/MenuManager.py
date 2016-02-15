@@ -54,6 +54,7 @@ class MenuManager():
 
     def enterMenuMode(self):
         self.menuMode = True
+        self.initiateDisplay()
 
     def exitMenuMode(self):
         self.menuMode = False

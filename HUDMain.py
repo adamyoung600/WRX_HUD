@@ -13,6 +13,8 @@ from MenuSystem.MenuManager import MenuManager
 from Util.Config import Config
 from EngineData.EcuData import EcuData
 from DataDisplay import DataDisplay
+from Hardware.Input.SwitchPanel import SwitchPanel
+from Hardware.ShiftLights import ShiftLights
 
 
 class HUDMain():
@@ -23,25 +25,57 @@ class HUDMain():
         self._menuManager = MenuManager()
         self._gearIndicator = GearIndicator()
         self._dataDisplay = DataDisplay()
-        self._ecu = EcuData()
 
+        self._ecu = EcuData()
+        self._switchPanel = SwitchPanel()
 
         self._menuMode = False
 
         # Read in config from the file system.
         self._monitoredParamIDs = None
         self._rpmThresholds == None
-        self._loadConfig()
+        self._loadConfig()      # Sets the monitored params in the ecu as well.
+        self._shiftLights = ShiftLights(self._rpmThresholds)
 
-
+        self._oldGear = None
+        self._newGear = None
 
 
     def mainLoop(self):
-        pass
-        # Query monitored parameters and update data display
-        monitoredValues = self._ecu.getMonitoredParams()
-        self._dataDisplay.update(monitoredValues)
+        while True:
+            if not self._inMenuMode:
+                # Query monitored parameters and update data display
+                monitoredValues = self._ecu.getMonitoredParams()
+                self._dataDisplay.update(monitoredValues)
 
+                # UPdate Shift Lights
+                rpm = int(self._ecu.getEngineSpeed())
+                if self._switchPanel.isShiftLightEnabled():
+                    self._shiftLights.update(rpm)
+
+                # Update Gear Display
+                if self._switchPanel.isLCDEnabled():
+                    if not self._ecu.isInGear():
+                        self._newGear = "N"
+                    else:
+                        self._newGear = self._ecu.getCurrentGear()
+
+                    if self._newGear != self._oldGear:
+                        self._oldGear = self._newGear
+                        if self._newGear == "N":
+                            self._gearIndicator.DisplayNeutral()
+                        else:
+                            self._gearIndicator.DisplayGear(self._newGear)
+
+                #if self._ecu.getThrottlePedalAngle() > self._throttlePositionThreshold:
+                    #Start Logging
+
+                # Check for keyboard input
+                self.checkForKeyboardInput()
+
+            else:
+                while self.menuMode:
+                    self.checkForKeyboardInput()
 
     def _loadConfig(self):
         if self._config == None:
@@ -62,6 +96,7 @@ class HUDMain():
 
         if self._menuMode == False and inputVal != None:
             self.menuMode = True
+            self._menuManager.enterMenuMode()
             return
 
         if inputVal == 'w':
