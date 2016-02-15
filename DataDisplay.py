@@ -17,13 +17,10 @@ class DataDisplay():
     def update(self, newValues):
         for i in range(3):
             tempString = newValues[i]
-            # Display only has room for 4 characters per value.  Must be this size.
+            # Display only has room for 4 characters per value.
             if len(tempString) > 4:
                 tempString = tempString[:4]
-            elif len(tempString) < 4:
-                # Pad it to 4 characters using leading whitespace
-                for i in range(0, 3-len(tempString)):
-                    tempString = " " + tempString
+            self._lcd.sendStringByEnd(tempString, 1, i*6+3)
 
 
 
