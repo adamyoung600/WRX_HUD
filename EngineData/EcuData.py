@@ -138,13 +138,15 @@ class EcuData():
             return None
 
     def getEngineSpeed(self):
-        pass
+        return self._getParamByID("P8")
 
     def getCurrentGear(self):
-        pass
+        return self._getParamByID("E25")
+
+    def getThrottlePedalAngle(self):
+        return self._getParamByID("P13")
 
     def isInGear(self):
-        pass
+        # Check Neutral Switch (S4) and Clutch Switch (S63)
+        return self._getParamByID("S4") == "0" and self._getParamByID("S63") == "0"
 
-    def getThrottlePosition(self):
-        pass
