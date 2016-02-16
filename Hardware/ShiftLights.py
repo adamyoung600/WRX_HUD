@@ -7,10 +7,10 @@ class ShiftLights():
         self._orangeLed = 22
         self._redLed = 23
         self._blueLed = 24
-        GPIO.setup(self._greenLed, GPIO.OUTPUT)
-        GPIO.setup(self._orangeLed, GPIO.OUTPUT)
-        GPIO.setup(self._redLed, GPIO.OUTPUT)
-        GPIO.setup(self._blueLed, GPIO.OUTPUT)
+        GPIO.setup(self._greenLed, GPIO.OUT)
+        GPIO.setup(self._orangeLed, GPIO.OUT)
+        GPIO.setup(self._redLed, GPIO.OUT)
+        GPIO.setup(self._blueLed, GPIO.OUT)
         self._anyLightsOn = False
         self.clearLights()
         self.setThresholds(thresholds)
