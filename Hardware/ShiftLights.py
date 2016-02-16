@@ -7,6 +7,7 @@ class ShiftLights():
         self._orangeLed = 22
         self._redLed = 23
         self._blueLed = 24
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self._greenLed, GPIO.OUT)
         GPIO.setup(self._orangeLed, GPIO.OUT)
         GPIO.setup(self._redLed, GPIO.OUT)
