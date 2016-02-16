@@ -15,7 +15,7 @@ Interface to the 16x2 OLED display sold by the ebay user wide-hk.
 class WideHKOLED():
     def __init__(self):
         self.__initialize()
-        self.__bus = smbus.SMBus(1)
+        self.__bus = smbus.SMBus(0)
 
     """
     Most of this was stripped from the sample arduino code that

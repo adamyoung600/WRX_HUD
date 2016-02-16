@@ -67,6 +67,7 @@ class HUDMain():
                         else:
                             self._gearIndicator.DisplayGear(self._newGear)
 
+                #TODO: Implement logger
                 #if self._ecu.getThrottlePedalAngle() > self._throttlePositionThreshold:
                     #Start Logging
 
