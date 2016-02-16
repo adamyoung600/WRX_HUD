@@ -24,4 +24,6 @@ while True:
     lights.update("6500")
     time.sleep(1)
 
-
+    print "Clearing lights"
+    lights._clearLights()
+    time.sleep(4)
