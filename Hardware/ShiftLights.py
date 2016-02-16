@@ -13,7 +13,7 @@ class ShiftLights():
         GPIO.setup(self._redLed, GPIO.OUT)
         GPIO.setup(self._blueLed, GPIO.OUT)
         self._anyLightsOn = False
-        self.clearLights()
+        self._clearLights()
         self.setThresholds(thresholds)
 
 
