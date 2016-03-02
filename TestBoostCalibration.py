@@ -6,4 +6,4 @@ keyboard = Keyboard()
 
 while True:
     if(keyboard.getChar() == 'w'):
-        BoostGauge.calibrate()
+        boost.calibrate()
