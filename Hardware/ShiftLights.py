@@ -20,8 +20,8 @@ class ShiftLights():
 
     def setThresholds(self, thresholds):
         self._greenThreshold = thresholds[0]
-        self._redThreshold = thresholds[1]
-        self._orangeThreshold = thresholds[2]
+        self._orangeThreshold = thresholds[1]
+        self._redThreshold = thresholds[2]
         self._blueThreshold = thresholds[3]
 
     def _clearLights(self):
