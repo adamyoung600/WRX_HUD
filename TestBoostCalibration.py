@@ -1,4 +1,9 @@
 from Hardware.BoostGauge import BoostGauge
+from Hardware.Input.Keyboard import Keyboard
 
 boost = BoostGauge()
-BoostGauge.calibrate()
+keyboard = Keyboard()
+
+while True:
+    if(keyboard.getChar() == 'w'):
+        BoostGauge.calibrate()
