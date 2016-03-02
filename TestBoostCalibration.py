@@ -7,3 +7,5 @@ keyboard = Keyboard()
 while True:
     if(keyboard.getChar() == 'w'):
         boost.calibrate()
+    if(keyboard.getChar() == 'q'):
+        break
