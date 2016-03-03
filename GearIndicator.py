@@ -11,21 +11,21 @@ class GearIndicator():
         self.lcd = SH1106LCD()
 
         #Import startup image from disk.
-        self.image_path = os.chdir("Hardware")
+        #self.image_path = os.chdir("Hardware")
 
-        self.lcd.addImage("FirstGear", "shift_1_sized.bmp")
-        self.lcd.addImage("SecondGear", "shift_2_sized.bmp")
-        self.lcd.addImage("ThirdGear", "shift_3_sized.bmp")
-        self.lcd.addImage("FourthGear", "shift_4_sized.bmp")
-        self.lcd.addImage("FifthGear", "shift_5_sized.bmp")
-        self.lcd.addImage("Reverse", "shift_R_sized.bmp")
-        self.lcd.addImage("Neutral", "shift_N_sized.bmp")
-        self.lcd.addImage("SubaruLogo", "subie_logo.bmp")
-        self.lcd.addImage("WrxLogo", "wrx_logo.bmp")
+        self.lcd.addImage("FirstGear", "Hardware/shift_1_sized.bmp")
+        self.lcd.addImage("SecondGear", "Hardware/shift_2_sized.bmp")
+        self.lcd.addImage("ThirdGear", "Hardware/shift_3_sized.bmp")
+        self.lcd.addImage("FourthGear", "Hardware/shift_4_sized.bmp")
+        self.lcd.addImage("FifthGear", "Hardware/shift_5_sized.bmp")
+        self.lcd.addImage("Reverse", "Hardware/shift_R_sized.bmp")
+        self.lcd.addImage("Neutral", "Hardware/shift_N_sized.bmp")
+        self.lcd.addImage("SubaruLogo", "Hardware/subie_logo.bmp")
+        self.lcd.addImage("WrxLogo", "Hardware/wrx_logo.bmp")
         self.lcd.displayBufferedImage("SubaruLogo", 0, 0)
-        time.sleep(2)
+        time.sleep(1)
         self.lcd.displayBufferedImage("WrxLogo", 0, 0)
-        time.sleep(2)
+        time.sleep(1)
         self.lcd.clearScreen()
 
 
