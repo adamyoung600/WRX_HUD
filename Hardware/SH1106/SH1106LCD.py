@@ -180,8 +180,16 @@ class SH1106LCD():
      data sent will be a command
     """
     def __sendCommand(self, command):
-        self.bus.write_byte_data(self.OLED_Address, self.OLED_Command_Mode, command)
-        time.sleep(0.01)
+        retries = 10
+        error = None
+        while retries > 0:
+            try:
+                self.bus.write_byte_data(self.OLED_Address, self.OLED_Command_Mode, command)
+            except IOError as e:
+                error = e
+                retries -= 1
+            else:
+                break
 
     """
      __sendDataByte(dataByte)
@@ -191,10 +199,19 @@ class SH1106LCD():
     Sends a single display data byte to the Display Data RAM.
     """
     def __sendDataByte(self, dataByte):
-        self.bus.write_byte_data(self.OLED_Address, self.OLED_Data_Mode, dataByte)
+        retries = 10
+        error = None
+        while retries > 0:
+            try:
+                self.bus.write_byte_data(self.OLED_Address, self.OLED_Data_Mode, dataByte)
+            except IOError as e:
+                error = e
+                retries -= 1
+            else:
+                break
 
     def sendDataByte(self, dataByte):
-        self.bus.write_byte_data(self.OLED_Address, self.OLED_Data_Mode, dataByte)
+        self.__sendDataByte(dataByte)
 
     """
     __sendData(data)
@@ -202,10 +219,19 @@ class SH1106LCD():
         data - Bytestream to send to the Display Data RAM.
     """
     def __sendData(self, data):
-        self.bus.write_i2c_block_data(self.OLED_Address, self.OLED_Data_Mode, data)
+        retries = 10
+        error = None
+        while retries > 0:
+            try:
+                self.bus.write_i2c_block_data(self.OLED_Address, self.OLED_Data_Mode, data)
+            except IOError as e:
+                error = e
+                retries -= 1
+            else:
+                break
 
     def sendData(self, data):
-        self.bus.write_i2c_block_data(self.OLED_Address, self.OLED_Data_Mode, data)
+        self.__sendData(data)
 
     """
     chunks(array, chunkSize)
