@@ -138,8 +138,13 @@ class SH1106LCD():
         for i in range(8):
                 page = 0xB0 + i
                 self.__sendCommand(page)
-                for i in range(132):
-                        self.__sendDataByte(0x00)
+                #Send 32 bytes at a time (max the bus can take) until we clear the first 128 columns.
+                for i in range(4):
+                        self.__sendData([0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                            0x00,0x00])
+                #Send the last 4 bytes to zero out all 132 columns
+                self.__sendData([0x00,0x00,0x00,0x00])
                 self.__sendCommand(0x00)	 #reset column address
                 self.__sendCommand(0x10)	 #reset column address
 
