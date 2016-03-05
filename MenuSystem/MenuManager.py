@@ -1,8 +1,8 @@
-from MenuSystem.MainMenuContext import *
-from MenuSystem.MonitoredParameterContext import *
-from MenuSystem.PeakBoostContext import *
-from MenuSystem.DtcCodeContext import *
-from MenuSystem.WifiContext import *
+from MenuSystem.MenuContextMain import *
+from MenuSystem.MenuContextMonitoredParameter import *
+from MenuSystem.MenuContextPeakBoost import *
+from MenuSystem.MenuContextDtcCode import *
+from MenuSystem.MenuContextWifi import *
 
 class MenuManager():
 
@@ -10,11 +10,11 @@ class MenuManager():
         self.lcd = inLcd
         #Spawn the menu contexts
         self.contexts = {}
-        self.contexts['Main Menu'] = MainMenuContext(self, inLcd)
-        self.contexts['Monitored Parameters'] = MonitoredParameterContext(self, inLcd)
-        self.contexts['Peak Boost'] = PeakBoostContext(self, inLcd)
-        self.contexts['Trouble Codes'] = DtcCodeContext(self, inLcd)
-        self.contexts['Wifi Config'] = WifiContext(self, inLcd)
+        self.contexts['Main Menu'] = MenuContextMenu(self, inLcd)
+        self.contexts['Monitored Parameters'] = MenuContextMonitoredParameter(self, inLcd)
+        self.contexts['Peak Boost'] = MenuContextPeakBoost(self, inLcd)
+        self.contexts['Trouble Codes'] = MenuContextDtcCode(self, inLcd)
+        self.contexts['Wifi Config'] = MenuContextWifi(self, inLcd)
 
         self.currentContext = 'Main Menu'
         self.menuMode = False

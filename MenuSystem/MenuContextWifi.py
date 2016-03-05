@@ -2,12 +2,12 @@ import Hardware.SH1106.SH1106LCD
 from MenuSystem.MenuContext import *
 
 
-class WifiContext(MenuContext):
+class MenuContextWifi(MenuContext):
 
     def __init__(self, inManager, inLcd):
-        super(WifiContext, self).__init__(inManager, inLcd)
+        super(MenuContextWifi, self).__init__(inManager, inLcd)
         self.title = "Wifi Setup"     #Title to display at the top of the display when this menu is active.
-        self.entries = ["Test Wifi 1", "Test Wifi 2"]           #Holds a reference to all the possible entries in the menu
+        self.entries = ["Switch to AP","Choose Network", "Display IP"]           #Holds a reference to all the possible entries in the menu
 
 
     """
@@ -28,9 +28,9 @@ class WifiContext(MenuContext):
 
     def onSet(self):
         if self.currentEntry==0:
-            self.displayBoost()
+            pass
         elif self.currentEntry==1:
-            self.resetBoost()
+            pass
 
     def onBack(self):
         self.manager.setCurrentContext("Main Menu")

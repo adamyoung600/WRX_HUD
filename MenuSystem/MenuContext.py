@@ -40,13 +40,29 @@ class MenuContext(object):
         self.lcd.displayString(">", self.currentEntry+2, 5)
 
     """
+    Called to wipe the menu options and display a message for 1 second.  Automatically redraws the menu.
+    """
+    def displayMessage(self):
+        self.lcd.clearScreen()
+        self.lcd.
+
+
+    """
     Callback methods that perform an action for a button press based on which menu the user is in.
     Need to be implemented by child classes
     """
     def onUp(self):
-        pass
+        if self.currentEntry > 0:
+            self.lastEntry = self.currentEntry
+            self.currentEntry -= 1
+            self.updateDisplay()
+
     def onDown(self):
-        pass
+        if self.currentEntry < len(self.entries)-1:
+            self.lastEntry = self.currentEntry
+            self.currentEntry += 1
+            self.updateDisplay()
+
     def onSet(self):
         pass
     def onBack(self):
