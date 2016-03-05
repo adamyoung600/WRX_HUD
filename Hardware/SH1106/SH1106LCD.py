@@ -324,6 +324,15 @@ class SH1106LCD():
                     currentRow += 1
                     self.setCursorPosition(currentRow, currentColumn)
 
+    """
+    centerString(inString, row)
+
+    """
+    def centerString(self, inString, row):
+        if len(inString) > 21:
+            return
+        startPosition = (131 - (6*len(inString)))/2
+        self.displayString(inString, row, startPosition)
 
     """
     displayInvertedString(inString, row, col)
