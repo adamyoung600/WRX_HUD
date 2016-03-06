@@ -127,6 +127,24 @@ class SH1106LCD():
         self.__sendCommand(0xA4)	  #Power off display
 
     """
+    clearRow(row)
+
+        row - The row to blank (0 - 7)
+
+      Writes 0x00 to every address in Display Data Ram
+      for a given row.  This will blank the row.
+    """
+    def clearRow(self, row):
+        page = 0xB0 + row
+        self.__sendCommand(page)
+        #Send 32 bytes at a time (max the bus can take) until we clear the first 128 columns.
+        for i in range(4):
+            self.__sendData([0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00])
+        #Send the last 4 bytes to zero out all 132 columns
+        self.__sendData([0x00,0x00,0x00,0x00])
+
+    """
      clearScreen()
      
       Writes 0x00 to every address in the Display Data Ram
@@ -136,15 +154,7 @@ class SH1106LCD():
     """
     def clearScreen(self):
         for i in range(8):
-                page = 0xB0 + i
-                self.__sendCommand(page)
-                #Send 32 bytes at a time (max the bus can take) until we clear the first 128 columns.
-                for i in range(4):
-                        self.__sendData([0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-                                            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-                                            0x00,0x00])
-                #Send the last 4 bytes to zero out all 132 columns
-                self.__sendData([0x00,0x00,0x00,0x00])
+                self.clear(i)
                 self.__sendCommand(0x00)	 #reset column address
                 self.__sendCommand(0x10)	 #reset column address
 
