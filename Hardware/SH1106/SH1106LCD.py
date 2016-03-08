@@ -154,7 +154,7 @@ class SH1106LCD():
     """
     def clearScreen(self):
         for i in range(8):
-                self.clear(i)
+                self.clearRow(i)
                 self.__sendCommand(0x00)	 #reset column address
                 self.__sendCommand(0x10)	 #reset column address
 
