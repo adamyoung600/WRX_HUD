@@ -66,6 +66,7 @@ class MenuManager():
 
     def setCurrentContextDirectly(self, inContext):
         self.currentContext = inContext
+        self.initiateDisplay()
 
     def initiateDisplay(self):
         self.currentContext.initDisplay()

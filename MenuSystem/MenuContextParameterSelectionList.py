@@ -63,7 +63,7 @@ class MenuContextParameterSelectionList(MenuContext):
             self.oldTopEntry = self.newTopEntry
         else:
             #Wipe the old arrow
-            self.lcd.displayString(" ", 2 + (self.LastEntry-self.newTopEntry), 5)
+            self.lcd.displayString(" ", 2 + (self.lastEntry-self.newTopEntry), 5)
 
         #Display the new arrow
         self.lcd.displayString(">", 2 + (self.currentEntry-self.newTopEntry) , 5)
@@ -107,7 +107,7 @@ class MenuContextParameterSelectionList(MenuContext):
         self.updateDisplay()
 
     def onSet(self):
-        if len(self.entries > self.currentEntry):
+        if len(self.entries) > self.currentEntry:
             self.manager.setCurrentContext(self.entries[self.currentEntry])
 
     def onBack(self):
