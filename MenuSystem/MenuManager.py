@@ -24,7 +24,7 @@ class MenuManager():
             Settings
         """
         self.contexts['Main'] = MenuContextMain(self, inLcd)
-        self.contexts['Monitored Parameters'] = MenuContextMonitoredParameter(self, inLcd)
+        self.contexts['Monitored Params'] = MenuContextMonitoredParameter(self, inLcd)
         self.contexts['Set Parameters'] = MenuContextSetParameters(self, inLcd)
         self.contexts['Set Passive Mode'] = MenuContextPassiveMode(self, inLcd)
         self.contexts['Peak Boost'] = MenuContextPeakBoost(self, inLcd)
