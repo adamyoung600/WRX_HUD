@@ -60,7 +60,7 @@ class MenuContextParameterSelectionList(MenuContext):
         if self.newTopEntry != self.oldtopEntry:
             #Update the listed items
             self.updateList()
-            self.oldTopEntry = self.newTopEntry
+            self.oldtopEntry = self.newTopEntry
         else:
             #Wipe the old arrow
             self.lcd.displayString(" ", 2 + (self.lastEntry-self.newTopEntry), 5)
@@ -99,7 +99,7 @@ class MenuContextParameterSelectionList(MenuContext):
             self.lastEntry = self.currentEntry
             self.currentEntry += 1
         else:
-            if self.newTopEntry + 5 < len(self.entries):
+            if self.newTopEntry + 6 < len(self.entries):
                 #Scroll down the list
                 self.newTopEntry += 1
                 self.currentEntry += 1
