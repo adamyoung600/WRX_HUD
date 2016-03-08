@@ -7,7 +7,7 @@ from HUDMain import HUDMain
 
 
 lcd = SH1106LCD()
-menuSystem = MenuManager(lcd, HUDMain)
+menuSystem = MenuManager(lcd, None)
 menuSystem.initiateDisplay()
 menuSystem.enterMenuMode()
 keyboard = Keyboard()
