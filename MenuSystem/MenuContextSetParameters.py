@@ -16,8 +16,8 @@ class MenuContextSetParameters(MenuContext):
 
     def onSet(self):
         if self.currentEntry==0:
-            self.manager.setContextDirectly(MenuContextParameterSelectionList(self.manager, self.lcd, 0))
+            self.manager.setCurrentContextDirectly(MenuContextParameterSelectionList(self.manager, self.lcd, 0))
         elif self.currentEntry==1:
-            self.manager.setContextDirectly(MenuContextParameterSelectionList(self.manager, self.lcd, 1))
+            self.manager.setCurrentContextDirectly(MenuContextParameterSelectionList(self.manager, self.lcd, 1))
 
 
