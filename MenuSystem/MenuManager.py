@@ -1,22 +1,37 @@
-from MenuSystem.MenuContextMain import *
-from MenuSystem.MenuContextMonitoredParameter import *
+from MenuSystem.MenuContextMain import MenuContextMain
+from MenuSystem.MenuContextMonitoredParameter import MenuContextMonitoredParameter
+from MenuSystem.MenuContextSetParameters import MenuContextSetParameters
+from MenuSystem.MenuContextPassiveMode import MenuContextPassiveMode
 from MenuSystem.MenuContextPeakBoost import *
 from MenuSystem.MenuContextDtcCode import *
 from MenuSystem.MenuContextWifi import *
 
 class MenuManager():
 
-    def __init__(self, inLcd):
+    def __init__(self, inLcd, inMain):
         self.lcd = inLcd
+        self.main = inMain
         #Spawn the menu contexts
         self.contexts = {}
-        self.contexts['Main Menu'] = MenuContextMenu(self, inLcd)
+        """
+        Main
+            MonitoredParameters
+                Set Parameters
+                    Parameter List
+                Set Passive Mode
+            Peak Boost
+            Trouble Codes
+            Settings
+        """
+        self.contexts['Main'] = MenuContextMain(self, inLcd)
         self.contexts['Monitored Parameters'] = MenuContextMonitoredParameter(self, inLcd)
+        self.contexts['Set Parameters'] = MenuContextSetParameters(self, inLcd)
+        self.contexts['Set Passive Mode'] = MenuContextPassiveMode(self, inLcd)
         self.contexts['Peak Boost'] = MenuContextPeakBoost(self, inLcd)
         self.contexts['Trouble Codes'] = MenuContextDtcCode(self, inLcd)
-        self.contexts['Wifi Config'] = MenuContextWifi(self, inLcd)
+        self.contexts['Settings'] = MenuContextWifi(self, inLcd)
 
-        self.currentContext = 'Main Menu'
+        self.currentContext = self.contexts['Main']
         self.menuMode = False
 
     """
@@ -24,33 +39,36 @@ class MenuManager():
     """
     def upButtonCallback(self):
         if self.menuMode:
-            self.contexts[self.currentContext].onUp()
+            self.currentContext.onUp()
 
     def downButtonCallback(self):
         if self.menuMode:
-            self.contexts[self.currentContext].onDown()
+            self.currentContext.onDown()
 
     def setButtonCallback(self):
         if self.menuMode:
-            self.contexts[self.currentContext].onSet()
+            self.currentContext.onSet()
         else:
             self.menuMode = True
-            self.currentContext = 'Main Menu'
+            self.currentContext = self.contexts['Main']
             self.initiateDisplay()
 
     def backButtonCallback(self):
         if self.menuMode:
-            self.contexts[self.currentContext].onBack()
+            self.currentContext.onBack()
 
     """
     Misc
     """
     def setCurrentContext(self, inContext):
-        self.currentContext = inContext
+        self.currentContext = self.contexts[inContext]
         self.initiateDisplay()
 
+    def setCurrentContextDirectly(self, inContext):
+        self.currentContext = inContext
+
     def initiateDisplay(self):
-        self.contexts[self.currentContext].initDisplay()
+        self.currentContext.initDisplay()
 
     def enterMenuMode(self):
         self.menuMode = True
@@ -59,3 +77,6 @@ class MenuManager():
     def exitMenuMode(self):
         self.menuMode = False
         self.main.setMenuMode(False)
+
+    def setMonitoredParameters(self, inParamIDs):
+        self.main.setMonitoredParams(inParamIDs)

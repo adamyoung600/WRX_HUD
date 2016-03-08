@@ -1,4 +1,5 @@
 import Hardware.SH1106.SH1106LCD
+import time
 
 
 
@@ -11,6 +12,7 @@ class MenuContext(object):
         self.entries = []           #Holds a reference to all the possible entries in the menu
         self.currentEntry = 0       #Index to the current entry in the menu that should be highlighted.  Defaults to the first entry.
         self.lastEntry = 0          #Index to the last entry that was highlighted.
+        self.parent = None
 
     """
     Used to display the menu data on the LCD
@@ -42,9 +44,11 @@ class MenuContext(object):
     """
     Called to wipe the menu options and display a message for 1 second.  Automatically redraws the menu.
     """
-    def displayMessage(self):
+    def displayMessage(self, inString):
         self.lcd.clearScreen()
-        self.lcd.
+        self.lcd.centerString(inString, 3)
+        time.sleep(1)
+        self.initDisplay()
 
 
     """
@@ -64,8 +68,11 @@ class MenuContext(object):
             self.updateDisplay()
 
     def onSet(self):
-        pass
+        if len(self.entries > self.currentEntry):
+            self.manager.setCurrentContext(self.entries[self.currentEntry])
+
     def onBack(self):
-        pass
+        if self.parent:
+            self.manager.setCurrentContext(self.parent)
 
 
