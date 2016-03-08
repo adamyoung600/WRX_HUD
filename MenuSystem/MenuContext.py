@@ -68,7 +68,7 @@ class MenuContext(object):
             self.updateDisplay()
 
     def onSet(self):
-        if len(self.entries > self.currentEntry):
+        if len(self.entries) > self.currentEntry:
             self.manager.setCurrentContext(self.entries[self.currentEntry])
 
     def onBack(self):
