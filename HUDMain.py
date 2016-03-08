@@ -43,7 +43,7 @@ class HUDMain():
 
     def mainLoop(self):
         while True:
-            if not self._inMenuMode:
+            if not self._menuMode:
                 # Query monitored parameters and update data display
                 monitoredValues = self._ecu.getMonitoredParams()
                 self._dataDisplay.update(monitoredValues)
@@ -79,7 +79,7 @@ class HUDMain():
                     self.checkForKeyboardInput()
 
     def _loadConfig(self):
-        if self._config == None:
+        if not self._config:
             self._config = Config()
         self._monitoredParamIDs = self._config.getMonitoredParams()
         self._rpmThresholds = self._config.getRpmThresholds()
@@ -88,6 +88,10 @@ class HUDMain():
 
     def calculateGear(self, engineSpeed, vehicleSpeed):
         pass
+
+    def setMonitoredParams(self, inParamIds):
+        self._monitoredParamIDs = inParamIds
+        self._ecu.setMonitoredParams(self._monitoredParamIDs)
 
     ##########################################
     # Keyboard input handling
