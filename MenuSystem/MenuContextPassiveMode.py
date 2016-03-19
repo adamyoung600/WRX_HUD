@@ -20,12 +20,12 @@ class MenuContextPassiveMode(MenuContext):
     """
     def onSet(self):
         if self.currentEntry == 0:
-            self.manager.setActiveMonitorMode(True)
-            self.displayMessage("Set Active")
+            self.manager.setPassiveMonitorMode(True)
+            self.displayMessage("Set Passive")
 
         elif self.currentEntry == 1:
-            self.manager.setActiveMonitorMode(False)
-            self.displayMessage("Set Passive")
+            self.manager.setPassiveMonitorMode(False)
+            self.displayMessage("Disable Passive")
 
 
 

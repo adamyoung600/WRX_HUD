@@ -5,8 +5,8 @@
 import traceback
 import time
 
-from EngineData.SSM.pimonitor.PMConnection import PMConnection
-from EngineData.SSM.pimonitor.PMXmlParser import PMXmlParser
+#from EngineData.SSM.pimonitor.PMConnection import PMConnection
+#from EngineData.SSM.pimonitor.PMXmlParser import PMXmlParser
 from GearIndicator import GearIndicator
 from Hardware.Input.Keyboard import Keyboard
 from MenuSystem.MenuManager import MenuManager
@@ -34,6 +34,7 @@ class HUDMain():
         # Read in config from the file system.
         self._monitoredParamIDs = None
         self._rpmThresholds == None
+        self._inActiveMonitoredMode = False
         self._loadConfig()      # Sets the monitored params in the ecu as well.
         self._shiftLights = ShiftLights(self._rpmThresholds)
 
@@ -84,6 +85,7 @@ class HUDMain():
         self._monitoredParamIDs = self._config.getMonitoredParams()
         self._rpmThresholds = self._config.getRpmThresholds()
         self._ecu.setMonitoredParams(self._monitoredParamIDs)
+        #TODO: Have the config save the active monitoring mode
 
 
     def calculateGear(self, engineSpeed, vehicleSpeed):
@@ -115,6 +117,9 @@ class HUDMain():
 
     def setMenuMode(self, enableMenuMode):
         self._menuMode = enableMenuMode
+
+    def setPassiveMonitorMode(self, inIsSet):
+        self._inPassiveMonitoredMode = inIsSet
 
     def upButtonCallback(self):
         self._menuManager.upButtonCallback()

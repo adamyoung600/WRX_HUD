@@ -23,6 +23,6 @@ class HUDMainDummy():
     def setMenuMode(self, enableMenuMode):
         self._menuMode = enableMenuMode
 
-    def setActiveMonitorMode(self, inIsSet):
-        self._inActiveMonitoredMode = inIsSet
+    def setPassiveMonitorMode(self, inIsSet):
+        self._inPassiveMonitoredMode = inIsSet
 
