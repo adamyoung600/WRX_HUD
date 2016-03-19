@@ -33,6 +33,8 @@ class MenuManager():
 
         self.currentContext = self.contexts['Main']
         self.menuMode = False
+        self.monitoredParam1 = None
+        self.monitoredParam2 = None
 
     """
     Callbacks for buttons
@@ -79,5 +81,11 @@ class MenuManager():
         self.menuMode = False
         self.main.setMenuMode(False)
 
-    def setMonitoredParameters(self, inParamIDs):
-        self.main.setMonitoredParams(inParamIDs)
+    def setMonitoredParam(self, inParamID, inParamNum):
+        if inParamNum == 1:
+            self.monitoredParam2 = inParamID
+        elif inParamNum == 2:
+            self.monitoredParam1 = inParamID
+
+    def updateMonitoredParameters(self):
+        self.main.setMonitoredParams([self.monitoredParam1, self.monitoredParam2])

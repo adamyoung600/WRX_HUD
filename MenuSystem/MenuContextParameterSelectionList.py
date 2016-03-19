@@ -3,7 +3,7 @@ from MenuSystem.MenuContext import *
 from Util.ParameterAbbreviations import abbreviations
 
 
-class MenuContextParameterSelectionList(MenuContext):
+class MenuContextParameterSelectionList(MenuContex):
 
     def __init__(self, inManager, inLcd, inParamNum):
         super(MenuContextParameterSelectionList, self).__init__(inManager, inLcd)
@@ -69,22 +69,12 @@ class MenuContextParameterSelectionList(MenuContext):
         self.lcd.displayString(">", 2 + (self.currentEntry-self.newTopEntry) , 5)
 
     """
-    Called to wipe the menu options and display a message for 1 second.  Automatically redraws the menu.
-    """
-    def displayMessage(self, inString):
-        self.lcd.clearScreen()
-        self.lcd.centerString(inString, 3)
-        time.sleep(1)
-        self.initDisplay()
-
-
-    """
     Callback methods that perform an action for a button press based on which menu the user is in.
     Need to be implemented by child classes
     """
     def onUp(self):
         if self.currentEntry > self.newTopEntry:
-            self.lastEntry = self.currentEntry
+            self.lastEntry = self.currentEntrywwsswsopppopopo
             self.currentEntry -= 1
         else:
             if self.newTopEntry > 0:
@@ -107,9 +97,7 @@ class MenuContextParameterSelectionList(MenuContext):
         self.updateDisplay()
 
     def onSet(self):
-        if len(self.entries) > self.currentEntry:
-            self.manager.setCurrentContext(self.entries[self.currentEntry])
-
-    def onBack(self):
-        if self.parent:
-            self.manager.setCurrentContext(self.parent)
+        id = abbreviations.keys[self.currentEntry]
+        self.manager.setMonitoredParam(id, self.paramNumber)
+        self.manager.updateMonitoredParameters()
+        self.displayMessage("Param Set")

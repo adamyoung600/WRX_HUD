@@ -9,6 +9,7 @@ class MenuContextSettings(MenuContext):
         self.title = "Settings"         #Title to display at the top of the display when this menu is active.
         self.entries = ["Shift Lights","Logging Trigger","Calibrate Boost","Wifi Config","Soft Reset"]           #Holds a reference to all the possible entries in the menu
 
+
     """
     Callback methods that perform an action for a button press based on which menu the user is in.
     """
