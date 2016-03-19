@@ -1,10 +1,11 @@
 from MenuSystem.MenuManager import *
 from Hardware.SH1106.SH1106LCD import *
 from Hardware.Input.Keyboard import *
+from HUDMainDummy import *
 
 
 lcd = SH1106LCD()
-menuSystem = MenuManager(lcd, None)
+menuSystem = MenuManager(lcd, HUDMainDummy())
 menuSystem.initiateDisplay()
 menuSystem.enterMenuMode()
 keyboard = Keyboard()
