@@ -3,7 +3,7 @@ from MenuSystem.MenuContext import *
 from Util.ParameterAbbreviations import abbreviations
 
 
-class MenuContextParameterSelectionList(MenuContex):
+class MenuContextParameterSelectionList(MenuContext):
 
     def __init__(self, inManager, inLcd, inParamNum):
         super(MenuContextParameterSelectionList, self).__init__(inManager, inLcd)
@@ -97,7 +97,7 @@ class MenuContextParameterSelectionList(MenuContex):
         self.updateDisplay()
 
     def onSet(self):
-        id = abbreviations.keys[self.currentEntry]
+        id = abbreviations.keys()[self.currentEntry]
         self.manager.setMonitoredParam(id, self.paramNumber)
         self.manager.updateMonitoredParameters()
         self.displayMessage("Param Set")
