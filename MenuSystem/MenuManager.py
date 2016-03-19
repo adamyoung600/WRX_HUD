@@ -87,5 +87,10 @@ class MenuManager():
         elif inParamNum == 2:
             self.monitoredParam1 = inParamID
 
+    def setActiveMonitorMode(self, inIsSet):
+        self.main.setActiveMonitorMode(inIsSet)
+
     def updateMonitoredParameters(self):
         self.main.setMonitoredParams([self.monitoredParam1, self.monitoredParam2])
+
+
