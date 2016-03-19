@@ -74,7 +74,7 @@ class MenuContextParameterSelectionList(MenuContext):
     """
     def onUp(self):
         if self.currentEntry > self.newTopEntry:
-            self.lastEntry = self.currentEntrywwsswsopppopopo
+            self.lastEntry = self.currentEntry
             self.currentEntry -= 1
         else:
             if self.newTopEntry > 0:

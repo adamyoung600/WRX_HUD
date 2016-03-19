@@ -8,6 +8,7 @@ class MenuContextPassiveMode(MenuContext):
         super(MenuContextPassiveMode,self).__init__(inManager, inLcd)
         self.title = "Set Passive Mode"     #Title to display at the top of the display when this menu is active.
         self.entries = ["Yes", "No"]           #Holds a reference to all the possible entries in the menu
+        self.parent = "Monitored Params"
 
 
     """
@@ -18,7 +19,15 @@ class MenuContextPassiveMode(MenuContext):
     Callback methods that perform an action for a button press based on which menu the user is in.
     """
     def onSet(self):
-        pass
-    def onBack(self):
-        pass
+        if self.currentEntry == 0:
+            self.manager.setActiveMonitorMode(True)
+            self.displayMessage("Set Active")
+
+        elif self.currentEntry == 1:
+            self.manager.setActiveMonitorMode(False)
+            self.displayMessage("Set Passive")
+
+
+
+
 
