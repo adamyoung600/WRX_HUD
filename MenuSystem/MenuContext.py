@@ -1,4 +1,3 @@
-import Hardware.SH1106.SH1106LCD
 import time
 
 

@@ -35,6 +35,7 @@ class MenuManager():
         self.menuMode = False
         self.monitoredParam1 = None
         self.monitoredParam2 = None
+        self.peakBoost = 0.0
 
     """
     Callbacks for buttons
@@ -92,5 +93,12 @@ class MenuManager():
 
     def updateMonitoredParameters(self):
         self.main.setMonitoredParams([self.monitoredParam1, self.monitoredParam2])
+
+    def setPeakBoost(self, inBoost):
+        self.peakBoost = inBoost
+
+    def getPeakBoost(self):
+        return self.peakBoost
+
 
 

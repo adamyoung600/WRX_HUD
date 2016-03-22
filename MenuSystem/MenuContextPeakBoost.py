@@ -1,4 +1,3 @@
-import Hardware.SH1106.SH1106LCD
 from MenuSystem.MenuContext import *
 
 
@@ -21,11 +20,10 @@ class MenuContextPeakBoost(MenuContext):
         elif self.currentEntry==1:
             self.resetBoost()
 
-    def onBack(self):
-        self.manager.setCurrentContext("Main Menu")
-
     def displayBoost(self):
-        pass
+        boost = self.manager.getPeakBoost()
+        self.displayMessage(boost + " PSI")
 
     def resetBoost(self):
-        pass
+        self.manager.setPeakBoost(0.0)
+        self.displayMessage("Boost Reset")
