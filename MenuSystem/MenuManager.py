@@ -4,6 +4,9 @@ from MenuSystem.MenuContextSetParameters import MenuContextSetParameters
 from MenuSystem.MenuContextPassiveMode import MenuContextPassiveMode
 from MenuSystem.MenuContextPeakBoost import *
 from MenuSystem.MenuContextDtcCode import *
+from MenuSystem.MenuContextSettings import *
+from MenuSystem.MenuContextShiftLights import *
+from MenuSystem.MenuContextSoftReset import *
 from MenuSystem.MenuContextWifi import *
 
 class MenuManager():
@@ -22,6 +25,9 @@ class MenuManager():
             Peak Boost
             Trouble Codes
             Settings
+                Shift Lights
+                Wifi
+                Soft Reset
         """
         self.contexts['Main'] = MenuContextMain(self, inLcd)
         self.contexts['Monitored Params'] = MenuContextMonitoredParameter(self, inLcd)
@@ -29,13 +35,19 @@ class MenuManager():
         self.contexts['Set Passive Mode'] = MenuContextPassiveMode(self, inLcd)
         self.contexts['Peak Boost'] = MenuContextPeakBoost(self, inLcd)
         self.contexts['Trouble Codes'] = MenuContextDtcCode(self, inLcd)
-        self.contexts['Settings'] = MenuContextWifi(self, inLcd)
+        self.contexts['Settings'] = MenuContextSettings(self, inLcd)
+        self.contexts['Shift Lights'] = MenuContextShiftLights(self, inLcd)
 
         self.currentContext = self.contexts['Main']
         self.menuMode = False
         self.monitoredParam1 = None
         self.monitoredParam2 = None
+
+        #TODO init peak boost
         self.peakBoost = 0.0
+        #TODO init shift light thresholds
+        self.shiftLightThresholds = [3000, 4000, 5000, 6000]
+
 
     """
     Callbacks for buttons
@@ -100,5 +112,11 @@ class MenuManager():
     def getPeakBoost(self):
         return self.peakBoost
 
+    def setShiftLightThreshold(self, inThresholdNum, inValue):
+        self.shiftLightThresholds[inThresholdNum] = inValue
+
+    def getShiftLightThreshold(self, inThresholdNum):
+        if inThresholdNum >= 0 and inThresholdNum < 4:
+            return self.shiftLightThresholds[inThresholdNum]
 
 
