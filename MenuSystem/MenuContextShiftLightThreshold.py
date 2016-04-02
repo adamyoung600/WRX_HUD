@@ -26,7 +26,7 @@ class MenuContextShiftLightThreshold(MenuContext):
     """
     def updateValue(self):
         self.lcd.clearRow(4)
-        self.lcd.centerString()
+        self.lcd.centerString(self.threshold, 4)
     """
     Callback methods that perform an action for a button press based on which menu the user is in.
     Need to be implemented by child classes
