@@ -28,3 +28,6 @@ class HUDMainDummy():
 
     def calibrateBoost(self):
         pass
+
+    def resetSystem(self):
+        print("Reset Called")
