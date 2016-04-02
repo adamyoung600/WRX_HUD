@@ -7,7 +7,7 @@ class MenuContextWifi(MenuContext):
         super(MenuContextWifi, self).__init__(inManager, inLcd)
         self.title = "Wifi Setup"     #Title to display at the top of the display when this menu is active.
         self.entries = ["Switch to AP","Choose Network", "Display IP"]           #Holds a reference to all the possible entries in the menu
-
+        self.parent = "Settings"
 
     """
     Callback methods that perform an action for a button press based on which menu the user is in.
@@ -30,9 +30,6 @@ class MenuContextWifi(MenuContext):
             pass
         elif self.currentEntry==1:
             pass
-
-    def onBack(self):
-        self.manager.setCurrentContext("Main Menu")
 
     def connectToNetwork(self):
         pass

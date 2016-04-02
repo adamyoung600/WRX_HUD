@@ -26,7 +26,7 @@ class MenuManager():
             Trouble Codes
             Settings
                 Shift Lights
-                Wifi
+                Wifi Setup
                 Soft Reset
         """
         self.contexts['Main'] = MenuContextMain(self, inLcd)
@@ -37,6 +37,7 @@ class MenuManager():
         self.contexts['Trouble Codes'] = MenuContextDtcCode(self, inLcd)
         self.contexts['Settings'] = MenuContextSettings(self, inLcd)
         self.contexts['Shift Lights'] = MenuContextShiftLights(self, inLcd)
+        self.contexts['Wifi Setup'] = MenuContextWifi(self, inLcd)
 
         self.currentContext = self.contexts['Main']
         self.menuMode = False
@@ -105,6 +106,9 @@ class MenuManager():
 
     def updateMonitoredParameters(self):
         self.main.setMonitoredParams([self.monitoredParam1, self.monitoredParam2])
+
+    def calibrateBoost(self):
+        self.main.calibrateBoost()
 
     def setPeakBoost(self, inBoost):
         self.peakBoost = inBoost

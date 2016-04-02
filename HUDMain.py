@@ -1,6 +1,4 @@
-# from Sh1106.GearIndicatorLCD import *
-# from I2CConfig import *
-# from WideHKOLED.WideHKOLED import *
+
 
 import traceback
 import time
@@ -15,6 +13,7 @@ from EngineData.EcuData import EcuData
 from DataDisplay import DataDisplay
 from Hardware.Input.SwitchPanel import SwitchPanel
 from Hardware.ShiftLights import ShiftLights
+from Hardware.BoostGauge import BoostGauge
 
 
 class HUDMain():
@@ -25,6 +24,7 @@ class HUDMain():
         self._menuManager = MenuManager()
         self._gearIndicator = GearIndicator()
         self._dataDisplay = DataDisplay()
+        self._boostGauge = BoostGauge()
 
         self._ecu = EcuData()
         self._switchPanel = SwitchPanel()
@@ -121,6 +121,8 @@ class HUDMain():
     def setPassiveMonitorMode(self, inIsSet):
         self._inPassiveMonitoredMode = inIsSet
 
+
+#TODO: Below check if in passive mode first before passing button callbacks to menu manager
     def upButtonCallback(self):
         self._menuManager.upButtonCallback()
 
@@ -132,4 +134,7 @@ class HUDMain():
 
     def backButtonCallback(self):
         self._menuManager.backButtonCallback()
+
+    def calibrateBoost(self):
+        self._boostGauge.calibrate()
 

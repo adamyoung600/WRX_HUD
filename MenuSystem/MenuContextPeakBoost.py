@@ -4,7 +4,7 @@ from MenuSystem.MenuContext import *
 class MenuContextPeakBoost(MenuContext):
 
     def __init__(self, inManager, inLcd):
-        super(MenuContextPeakBoost, self).__init__(inManager, inLcd)
+        super(MenuContext, self).__init__(inManager, inLcd)
         self.title = "Peak Boost"     #Title to display at the top of the display when this menu is active.
         self.entries = ["Display Peak Boost", "Reset Peak Boost"]           #Holds a reference to all the possible entries in the menu
 

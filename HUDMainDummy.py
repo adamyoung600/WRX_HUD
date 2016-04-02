@@ -26,3 +26,5 @@ class HUDMainDummy():
     def setPassiveMonitorMode(self, inIsSet):
         self._inPassiveMonitoredMode = inIsSet
 
+    def calibrateBoost(self):
+        pass

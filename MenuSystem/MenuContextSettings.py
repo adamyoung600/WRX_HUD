@@ -14,14 +14,17 @@ class MenuContextSettings(MenuContext):
     """
 
     def onSet(self):
-        if self.currentEntry==0:
+        if self.currentEntry==1:     #Logging Trigger
             pass
-        elif self.currentEntry==1:
+        elif self.currentEntry==2:  #Calibrate Booste
+            self.manager.calibrateBoost()
+            self.displayMessage("Calibration Done")
+        elif self.currentEntry==4:  #Soft Reset
             pass
-        elif self.currentEntry==2:
-            pass
-        elif self.currentEntry==3:
-            pass
+        else:
+            if len(self.entries) > self.currentEntry:
+                self.manager.setCurrentContext(self.entries[self.currentEntry])
+
 
     def onBack(self):
         #Exit menuingMode
