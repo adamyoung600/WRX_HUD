@@ -24,7 +24,7 @@ class MenuContextShiftLightThreshold(MenuContext):
     """
     Used to display the current list items on the screen
     """
-    def updateVal(self):
+    def updateValue(self):
         self.lcd.clearRow(4)
         self.lcd.centerString()
     """
