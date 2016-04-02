@@ -2,6 +2,7 @@
 
 import traceback
 import time
+import os
 
 #from EngineData.SSM.pimonitor.PMConnection import PMConnection
 #from EngineData.SSM.pimonitor.PMXmlParser import PMXmlParser
@@ -137,4 +138,11 @@ class HUDMain():
 
     def calibrateBoost(self):
         self._boostGauge.calibrate()
+
+    def resetSystem(self):
+        os.system("sudo reboot")
+
+    def shutdownSystem(self):
+        os.system("sudo shutdown -h now")
+
 
