@@ -312,7 +312,7 @@ class SH1106LCD():
     """
     def displayString(self, inString, row, col):
         #Convert string to all caps as lower case characters are not implemented in the font.
-        displayString = inString.upper()
+        displayString = str(inString).upper()
         #Set the row/column position
         self.setCursorPosition(row, col)
         currentRow = row
@@ -339,6 +339,7 @@ class SH1106LCD():
 
     """
     def centerString(self, inString, row):
+        inString = str(inString)
         if len(inString) > 21:
             return
         startPosition = (131 - (6*len(inString)))/2
@@ -350,7 +351,7 @@ class SH1106LCD():
     """
     def displayInvertedString(self, inString, row, col):
         #Convert string to all caps as lower case characters are not implemented in the font.
-        displayString = inString.upper()
+        displayString = str(inString).upper()
         #Set the row/column position
         self.setCursorPosition(row, col)
         currentRow = row
