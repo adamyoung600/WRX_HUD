@@ -43,6 +43,4 @@ class MenuContextShiftLightThreshold(MenuContext):
 
     def onSet(self):
         self.manager.setShiftLightThreshold(self.thresholdNum, self.threshold)
-        self.displayMessage("Set to: " + self.threshold)
-        if self.parent:
-            self.manager.setCurrentContext(self.parent)
+        self.displayMessage("Set to: " + str(self.threshold))
