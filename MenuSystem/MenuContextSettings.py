@@ -19,8 +19,6 @@ class MenuContextSettings(MenuContext):
         elif self.currentEntry==2:  #Calibrate Booste
             self.manager.calibrateBoost()
             self.displayMessage("Calibration Done")
-        elif self.currentEntry==4:  #Soft Reset
-            pass
         else:
             if len(self.entries) > self.currentEntry:
                 self.manager.setCurrentContext(self.entries[self.currentEntry])
