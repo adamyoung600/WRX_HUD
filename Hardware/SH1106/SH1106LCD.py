@@ -327,19 +327,20 @@ class SH1106LCD():
             self.__sendDataByte(0x00)
             currentColumn += 6
 
-            if wrap:
-                #Wrap text to the next line if necessary.
-                if(currentColumn > 123):
-                    #Bail out if you reach the bottom of the screen
+
+            #Wrap text to the next line if necessary.
+            if(currentColumn > 123):
+                if wrap:
+                    #Wrap text but bail out if you reach the bottom of the screen
                     if(currentRow >= 7):
                         return
                     else:
                         currentColumn = 0
                         currentRow += 1
                         self.setCursorPosition(currentRow, currentColumn)
-            else:
-                #bail out here
-                return
+                else:
+                    #bail out here because we are not wrapping
+                    return
     """
     centerString(inString, row)
 
