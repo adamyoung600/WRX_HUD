@@ -16,7 +16,7 @@ class MenuContextOpenNetworks(MenuContext):
     """
     def onSet(self):
         self.displayMessage("Connecting...")
-        connectSuccessful = self.manager.connectToNetwork(self.currentEntry)
+        connectSuccessful = self.manager.connectToNetwork(self.entries[self.currentEntry])
         if connectSuccessful:
             self.displayMessage("ConnectSuccessful")
         else:
