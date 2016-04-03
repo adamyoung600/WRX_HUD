@@ -166,4 +166,25 @@ class HUDMain():
                 ssid = line.split(':')[1].replace('\"','')
         return ssid
 
+    """
+    getOpenNetworks
 
+    Parses the output of "iwlist wlan0 scan" to find all open wifi networks.
+
+    Returns - List of SSIDs of all open networks in range
+    """
+    def getOpenNetworks(self):
+        output = check_output(["iwlist", "wlan0", "scan"])
+        networks = []
+        ssid = None
+        for line in output.split("\n"):
+            if "ESSID" in line:
+                ssid = line.split(':')[1].replace('\"','')
+            if "Encryption key:off" in line:
+                networks.append(ssid)
+        return networks
+
+    #Has to return a boolean
+    def connectToNetwork(self, inSSID):
+        print("Received request to connect to " + inSSID)
+        return True

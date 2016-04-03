@@ -30,7 +30,12 @@ class MenuManager():
             Settings
                 Shift Lights
                 Wifi Setup
+                    AP Mode
+                    Find Open Network
+                    Iphone Tether
+                    Network Details
                 Soft Reset
+                Update
         """
         self.contexts['Main'] = MenuContextMain(self, inLcd)
         self.contexts['Monitored Params'] = MenuContextMonitoredParameter(self, inLcd)
@@ -41,8 +46,9 @@ class MenuManager():
         self.contexts['Settings'] = MenuContextSettings(self, inLcd)
         self.contexts['Shift Lights'] = MenuContextShiftLights(self, inLcd)
         self.contexts['Wifi Setup'] = MenuContextWifi(self, inLcd)
-        self.contexts['Soft Reset'] = MenuContextSoftReset(self, inLcd)
+        self.contexts['Find Open Network'] = MenuContextOpenNetworks(self, inLcd)
         self.contexts['Network Details'] = MenuContextNetworkDetails(self, inLcd)
+        self.contexts['Soft Reset'] = MenuContextSoftReset(self, inLcd)
 
         self.currentContext = self.contexts['Main']
         self.menuMode = False
@@ -132,9 +138,16 @@ class MenuManager():
         self.main.resetSystem()
 
     def getIpAddress(self):
-        return(self.main.getIpAddress('wlan0'))
+        return self.main.getIpAddress('wlan0')
 
     def getSSID(self):
-        return(self.main.getSSID())
+        return self.main.getSSID()
+
+    def getOpenNetworks(self):
+        return self.manager.getOpenNetworks
+
+    def connectToNetwork(self, inSSID):
+        return(self.main.connectToNetwork(inSSID))
+
 
 
