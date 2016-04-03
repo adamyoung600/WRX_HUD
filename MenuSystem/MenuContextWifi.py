@@ -16,7 +16,7 @@ class MenuContextWifi(MenuContext):
     def onSet(self):
         if self.currentEntry==0:
             pass
-        elif self.currentEntry==1:
+        elif self.currentEntry==2:
             pass
         elif len(self.entries) > self.currentEntry:
             self.manager.setCurrentContext(self.entries[self.currentEntry])
