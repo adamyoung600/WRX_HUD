@@ -23,6 +23,8 @@ class MenuManager():
                     Parameter List
                 Set Passive Mode
             Peak Boost
+                Display Peak
+                Reset Peak
             Trouble Codes
             Settings
                 Shift Lights
@@ -38,6 +40,7 @@ class MenuManager():
         self.contexts['Settings'] = MenuContextSettings(self, inLcd)
         self.contexts['Shift Lights'] = MenuContextShiftLights(self, inLcd)
         self.contexts['Wifi Setup'] = MenuContextWifi(self, inLcd)
+        self.contexts['Soft Reset'] = MenuContextSoftReset(self, inLcd)
 
         self.currentContext = self.contexts['Main']
         self.menuMode = False
@@ -122,5 +125,14 @@ class MenuManager():
     def getShiftLightThreshold(self, inThresholdNum):
         if inThresholdNum >= 0 and inThresholdNum < 4:
             return self.shiftLightThresholds[inThresholdNum]
+
+    def resetSystem(self):
+        self.main.resetSystem()
+
+    def getIpAddress(self):
+        return(self.main.getIpAddress('wlan0'))
+
+    def getSSID(self):
+        return(self.main.getSSID())
 
 

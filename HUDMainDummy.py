@@ -1,4 +1,7 @@
-
+import socket
+import fcntl
+import struct
+from subprocess import check_output
 
 class HUDMainDummy():
 
@@ -31,3 +34,20 @@ class HUDMainDummy():
 
     def resetSystem(self):
         print("Reset Called")
+
+    # Below stolen from http://code.activestate.com/recipes/439094-get-the-ip-address-associated-with-a-network-inter/
+    def getIpAddress(self, inInterface):
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        return socket.inet_ntoa(fcntl.ioctl(
+            s.fileno(),
+            0x8915,  # SIOCGIFADDR
+            struct.pack('256s', inInterface[:15])
+        )[20:24])
+
+    def getSSID(self):
+        output = check_output(["iwconfig", "wlan0"])
+        ssid = "error"
+        for line in output.split():
+            if "ESSID" in line:
+                ssid = line.split(':')[1].replace('\"','')
+        return ssid
