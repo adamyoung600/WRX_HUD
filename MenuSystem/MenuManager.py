@@ -145,7 +145,7 @@ class MenuManager():
         return self.main.getSSID()
 
     def getOpenNetworks(self):
-        return self.main.getOpenNetworks
+        return self.main.getOpenNetworks()
 
     def connectToNetwork(self, inSSID):
         return(self.main.connectToNetwork(inSSID))
