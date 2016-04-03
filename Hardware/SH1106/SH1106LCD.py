@@ -171,13 +171,14 @@ class SH1106LCD():
         self.__sendCommand(page)
         #For some reason, the LCD does not seem to be correctly set up to display on the first two collumn addresses.
         #Therefor increase the column value by 2
-        column = col + 2
+        if col < 3:
+            col = col + 2
         # Calculate the command bytes to set the column address
         # Column Address Offset: A7 A6 A5 A4 A3 A2 A1 A0
         # Upper Address Nibble Command: 0 0 0 0 A3 A2 A1 A0
         # Lower Address Nibble Command: 0 0 0 1 A7 A6 A5 A4
-        lowerColumnOffsetByte = (column & 0x0F )
-        upperColumnOffsetByte = (column >> 4) + 0x10
+        lowerColumnOffsetByte = (col & 0x0F )
+        upperColumnOffsetByte = (col >> 4) + 0x10
         #Set column
         self.__sendCommand(upperColumnOffsetByte)	 #Upper 4 bits
         self.__sendCommand(lowerColumnOffsetByte)    #Lower 4 bits
