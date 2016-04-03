@@ -8,6 +8,7 @@ from MenuSystem.MenuContextSettings import *
 from MenuSystem.MenuContextShiftLights import *
 from MenuSystem.MenuContextSoftReset import *
 from MenuSystem.MenuContextWifi import *
+from MenuSystem.MenuContextNetworkDetails import *
 
 class MenuManager():
 
@@ -41,6 +42,7 @@ class MenuManager():
         self.contexts['Shift Lights'] = MenuContextShiftLights(self, inLcd)
         self.contexts['Wifi Setup'] = MenuContextWifi(self, inLcd)
         self.contexts['Soft Reset'] = MenuContextSoftReset(self, inLcd)
+        self.contexts['Network Details'] = MenuContextNetworkDetails(self, inLcd)
 
         self.currentContext = self.contexts['Main']
         self.menuMode = False
