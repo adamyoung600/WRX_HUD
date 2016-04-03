@@ -311,7 +311,9 @@ class SH1106LCD():
     displayString(inString, row, col)
 
     """
-    def displayString(self, inString, row, col):
+    def displayString(self, inString, row, col, wrap=None):
+        if wrap is None:
+            wrap = False
         #Convert string to all caps as lower case characters are not implemented in the font.
         displayString = str(inString).upper()
         #Set the row/column position
@@ -325,16 +327,19 @@ class SH1106LCD():
             self.__sendDataByte(0x00)
             currentColumn += 6
 
-            #Wrap text to the next line if necessary.
-            if(currentColumn > 123):
-                #Bail out if you reach the bottom of the screen
-                if(currentRow >= 7):
-                    return
-                else:
-                    currentColumn = 0
-                    currentRow += 1
-                    self.setCursorPosition(currentRow, currentColumn)
-
+            if wrap:
+                #Wrap text to the next line if necessary.
+                if(currentColumn > 123):
+                    #Bail out if you reach the bottom of the screen
+                    if(currentRow >= 7):
+                        return
+                    else:
+                        currentColumn = 0
+                        currentRow += 1
+                        self.setCursorPosition(currentRow, currentColumn)
+            else:
+                #bail out here
+                return
     """
     centerString(inString, row)
 
