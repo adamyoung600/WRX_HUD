@@ -9,6 +9,7 @@ from MenuSystem.MenuContextShiftLights import *
 from MenuSystem.MenuContextSoftReset import *
 from MenuSystem.MenuContextWifi import *
 from MenuSystem.MenuContextNetworkDetails import *
+from MenuSystem.MenuContextOpenNetworks import *
 
 class MenuManager():
 
