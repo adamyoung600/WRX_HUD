@@ -1,9 +1,9 @@
 from MenuSystem.MenuContext import *
 
-class MenuContextWifi(MenuContext):
+class MenuContextOpenNetworks(MenuContext):
 
     def __init__(self, inManager, inLcd):
-        super(MenuContextWifi, self).__init__(inManager, inLcd)
+        super(MenuContextOpenNetworks, self).__init__(inManager, inLcd)
         self.title = "Open Networks"     #Title to display at the top of the display when this menu is active.
         self.entries = self.manager.getOpenNetworks()           #Holds a reference to all the possible entries in the menu
         if len(self.entries) > 6:
