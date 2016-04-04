@@ -16,14 +16,15 @@ if __name__=="__main__":
     defined_parameters = parser.parse("logger_METRIC_Condensed_v131.xml")
     print "============================="
     for i in defined_parameters:
+        #print "\'" +i.get_id() + "\': \'" + i.get_name() + "\',"
         print i.to_string()
 
     print "starting parse of switches"
     defined_switches = switchParser.parse("logger_METRIC_Condensed_v131.xml")
     print "============================="
     for i in defined_switches:
+        #print "\'" +i.get_id() + "\': \'" + i.get_name() + "\',"
         print i.to_string()
-
     print "finished parse"
 
 
