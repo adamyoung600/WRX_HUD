@@ -94,3 +94,5 @@ $RECYCLE.BIN/
 *.msp
 # Pycharm project file
 .idea/workspace.xml
+# Config file
+Util/config.ini
