@@ -17,20 +17,20 @@ class EcuData():
         self.supported_parameters = {}
         self.defined_parameters = parser.parse("logger_METRIC_Condensed_v131.xml")
         self.connection = PMConnection()
-        self.__initConnection__()
+        self.initConnection()
         #Init core parameters
         self.coreParametersReady = False
         self.wheelSpeedParameter = None
         self.engineSpeedParameter = None
         self.monitoredParameters = None
 
-        self.__initCoreParameters()
+        self.__initCoreParameters__()
 
     """####################################################
     Initialization methods - Start
     ####################################################"""
 
-    def __initConnection__(self):
+    def initConnection(self):
 
         #Initialize the connection
         init_finished = False
@@ -111,6 +111,9 @@ class EcuData():
     """####################################################
     Initialization methods - End
     ####################################################"""
+
+    def closeConnection(self):
+        self.connection.close()
 
     """####################################################
     Core Parameter Queries - Start
