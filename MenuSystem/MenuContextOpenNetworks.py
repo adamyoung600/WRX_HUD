@@ -18,9 +18,9 @@ class MenuContextOpenNetworks(MenuContext):
         self.displayMessage("Connecting...")
         connectSuccessful = self.manager.connectToNetwork(self.entries[self.currentEntry])
         if connectSuccessful:
-            self.displayMessage("ConnectSuccessful")
+            self.displayMessage("Connect Successful")
         else:
-            self.displayMessage("ConnectFailed")
+            self.displayMessage("Connect oFailed")
         time.sleep(1)
         self.initDisplay()
 

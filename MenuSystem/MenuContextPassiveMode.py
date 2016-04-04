@@ -26,6 +26,8 @@ class MenuContextPassiveMode(MenuContext):
             self.manager.setPassiveMonitorMode(False)
             self.displayMessage("Disable Passive")
 
+        self.manager.setCurrentContext(self.parent)
+
 
 
 

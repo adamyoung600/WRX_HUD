@@ -15,6 +15,13 @@ class MenuContextSoftReset(MenuContext):
     def onSet(self):
         if self.currentEntry == 0:
             self.manager.resetSystem()
+            self.displayMessage("Resetting...")
 
         elif self.currentEntry == 1:
             self.manager.setCurrentContext(self.parent)
+
+    #Overide
+    def displayMessage(self, inString):
+        self.lcd.clearScreen()
+        self.lcd.centerString(inString, 3)
+
