@@ -24,6 +24,3 @@ class MenuContextSettings(MenuContext):
                 self.manager.setCurrentContext(self.entries[self.currentEntry])
 
 
-    def onBack(self):
-        #Exit menuingMode
-        self.manager.menuMode = False

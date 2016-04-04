@@ -22,6 +22,3 @@ class MenuContextWifi(MenuContext):
             self.manager.setCurrentContext(self.entries[self.currentEntry])
 
 
-    def connectToNetwork(self):
-        pass
-

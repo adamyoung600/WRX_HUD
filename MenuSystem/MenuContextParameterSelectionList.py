@@ -100,3 +100,4 @@ class MenuContextParameterSelectionList(MenuContext):
         self.manager.setMonitoredParam(id, self.paramNumber)
         self.manager.updateMonitoredParameters()
         self.displayMessage("Param Set")
+        self.manager.setCurrentContext(self.parent)
