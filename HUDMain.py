@@ -6,6 +6,7 @@ import os
 import socket
 import fcntl
 import struct
+import RPi.GPIO as GPIO
 from subprocess import check_output
 
 #from EngineData.SSM.pimonitor.PMConnection import PMConnection
@@ -24,6 +25,8 @@ from Hardware.BoostGauge import BoostGauge
 class HUDMain():
 
     def __init__(self):
+        #Rasp pi specific
+        GPIO.setmode(GPIO.BCM)
 
         self._keyboard = Keyboard()
         self._menuManager = MenuManager()
