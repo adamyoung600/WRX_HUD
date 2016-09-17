@@ -7,7 +7,7 @@ class MenuContextDtcCode(MenuContext):
         super(MenuContextDtcCode, self).__init__(inManager, inLcd)
         self.title = "Engine Trouble Codes"     #Title to display at the top of the display when this menu is active.
         self.entries = []           #Holds a reference to all the possible entries in the menu
-
+        self.parent = "Main"
 
     """
     Callback methods that perform an action for a button press based on which menu the user is in.
