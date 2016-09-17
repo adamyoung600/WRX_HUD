@@ -18,5 +18,3 @@ class MenuContextDtcCode(MenuContext):
         pass
     def onSet(self):
         pass
-    def onBack(self):
-        pass
