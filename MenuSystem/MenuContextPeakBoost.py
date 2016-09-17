@@ -22,7 +22,7 @@ class MenuContextPeakBoost(MenuContext):
 
     def displayBoost(self):
         boost = self.manager.getPeakBoost()
-        self.displayMessage(boost + " PSI")
+        self.displayMessage(str(boost) + " PSI")
 
     def resetBoost(self):
         self.manager.setPeakBoost(0.0)
