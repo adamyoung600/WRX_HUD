@@ -4,6 +4,7 @@ Feb 2016
 '''
 
 import time
+import thread
 
 from SSM.pimonitor.PMConnection import PMConnection
 from SSM.pimonitor.PMXmlParser import PMXmlParser
@@ -25,6 +26,9 @@ class EcuData():
         self.monitoredParameters = None
 
         self.__initCoreParameters__()
+
+        #Spin off thread to perform continous polling
+        thread.start_new_thread(loopAndPoll, ())
 
     """####################################################
     Initialization methods - Start
