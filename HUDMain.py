@@ -80,8 +80,11 @@ class HUDMain():
     def mainLoop(self):
         while True:
             if not self._menuMode:
+                # Have the ECU update all of the parameters it needs on this loop
+                self._ecu.refreshData()
+
                 # Query monitored parameters and update data display
-                monitoredValues = self._ecu.getMonitoredParams()
+                monitoredValues = self._ecu.getMonitoredParamValues()
                 self._dataDisplay.update(monitoredValues)
 
                 # UPdate Shift Lights

@@ -6,8 +6,10 @@ class DataDisplay():
 
     def __init__(self):
         self._lcd = WideHKOLED
+        self._ids = none
 
     def setDisplayTitles(self, paramIDs):
+        self._ids = paramIDs
         for i in range(2):
             title = "None"
             if paramIDs[i] in abbreviations:
@@ -16,7 +18,7 @@ class DataDisplay():
 
     def update(self, newValues):
         for i in range(2):
-            tempString = newValues[i]
+            tempString = newValues[self.ids[i]]
             # Display only has room for 4 characters per value.
             if len(tempString) > 4:
                 tempString = tempString[:4]

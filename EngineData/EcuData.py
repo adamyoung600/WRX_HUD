@@ -5,13 +5,17 @@ Feb 2016
 
 import time
 import thread
+import logging
 
 from SSM.pimonitor.PMConnection import PMConnection
 from SSM.pimonitor.PMXmlParser import PMXmlParser
 
+
+
 class EcuData():
 
     def __init__(self):
+        self._logFile = logging.getLogger("root")
         #Create connection to the ECU using SSM protocol
         ecuid = "1B04400405" #TODO: replace this with a call to query the ecu id.
         parser = PMXmlParser(ecuid)
@@ -20,35 +24,156 @@ class EcuData():
         self.connection = PMConnection()
         self.initConnection()
         #Init core parameters
-        self.coreParametersReady = False
         self.wheelSpeedParameter = None
         self.engineSpeedParameter = None
-        self.monitoredParameters = None
 
-        self.__initCoreParameters__()
+        #Monitored Parameters are the three that will be actively monitored on the steering wheel column lcd
+        self._monitoredParamIds = None
+        self._monitoredParams = None
+        self._monitoredParamData = None
 
-        #Spin off thread to perform continous polling
-        thread.start_new_thread(loopAndPoll, ())
+        #Core Parameters are the ones that have to be queried no matter what as they control the flow of logic for the main loop
+        self._coreParamsIds = ['E25',  #Gear Selection
+                            'S4',   #Neutral Switch
+                            'S23',  #Clutch Switch
+                            'P30',  #Pedal Angle
+                            'E11',  #Feedback Knock Control
+                            'E1',   #IAM
+                            'P8']   #RPM
+        self._coreParams = lookupParams(self._coreParamsIds) #dictionary of parameters keyed by ID
+        self._coreParamData = dict((element,0) for element in self._coreParamIds)    #dictionary of parameter values keyed by ID
+
+        #Log Parameters are only polled during a WOT pull.
+        self._logParamIds = ['P3',    #Air/Fuel Correction
+                           'P30',   #Pedal Angle
+                           'P200',  #Engine Load
+                           'P8',    #RPM
+                           'E11',   #FBKC
+                           'E12',   #FLKC
+                           'E1',    #IAM
+                           'P10',   #Ignition Total Timing
+                           'P201',  #Injector Duty Cycle
+                           'E20',   #Boost
+                           'E5',    #Boost Error
+                           'P12']    #MAF
+        self._logParams = lookupParams(self._logParamIds) #dictionary of parameters keyed by ID
+        self._logParamData = dict((element,0) for element in self._logParamIds)  #dictionary of parameter values keyed by ID
+
 
     """####################################################
-    Initialization methods - Start
+       Externally facing methods
     ####################################################"""
 
+
+    def setMonitoredParams(self, paramIds):
+        """
+        setMonitoredParams(paramIds) - Sets the parameters to be monitored by the steering wheel column lcd (maximum of 3).
+            paramIds - tuple of SSM IDs representing the parameters we would like to monitor.
+        """
+        # Reset all old values
+        self._monitoredParamIds = paramIds
+        self._monitoredParams = []
+        self._monitoredParamData = none
+
+        # Lookup parameters based on their IDs
+        if len(paramIDs) > 3:
+            self._logFile.error("Cannot monitor more than 3 parameters.")
+            return
+        for id in paramIDs:
+            for p in self.supported_parameters.keys():
+                if p.get_id() == id:
+                    self.monitoredParameters.append(p)
+        if len(self._monitoredParams) > 0:
+            self._monitoredParamData = dict((element, 0) for element in self._monitoredParamIds)
+
+    def getMonitoredParamValues(self):
+        return self._monitoredParamData
+
+    def refreshData(self, wotLogEnabled):
+        """
+        refreshData(wotLogEnabled) - Make superset of all parameters that need updating and query the ECU for current values.
+            wotLogEnabled - Boolean indicating that we are currently in the middle of a WOT log so we should ensure we query
+                the ECU for the log parameters
+
+        """
+        #Build superset
+        superset = self._coreParams.copy()
+        superset.update(self._monitoredParams)
+        if wotLogEnabled:
+            superset.update(self.logParams)
+        #Query ECU
+        packets = self.connection.read_parameters(superset)
+        #Update values
+        for i in range(len(packets)):
+            id = superset[i].get_id()
+            value = superset[i].get_value(packets[i])
+            if id in self._coreParamData:
+                self._coreParamData[id] = value
+            if id in self._monitoredParamData:
+                self._monitoredParamData[id] = value
+            if id in self._logParamData:
+                self._logParamData[id] = value
+
+    def getEngineSpeed(self):
+        return self._coreParamData["P8"]
+
+    def getCurrentGear(self):
+        return self._coreParamData["E25"]
+
+    def getThrottlePedalAngle(self):
+        return self._coreParamData["P13"]
+
+    def isInGear(self):
+        # Check Neutral Switch (S4) and Clutch Switch (S63)
+        return self._coreParamData["S4"] == "0" and self._coreParamData["S63"] == "0"
+
+    def getParamByID(self, id):
+        if id in self.supported_parameters.keys():
+            parameter = self.supported_parameters[id]
+            response = self.connection.read_parameter(parameter)
+            return parameter.get_value(response)
+        else:
+            return None
+
+    def getParamListByID(self, ids):
+        validParams = []
+        for id in ids:
+            if id in self.supported_parameters.keys():
+                validParams.append(self.supported_parameters[id])
+        if validParams:  # List not empty
+            responses = self.connection.read_parameters(validParams)
+            values = {}
+            for i in range(len(responses)):
+                values[validParams[i].get_id()] = validParams[i].get_value(responses[i])
+            return values
+        else:
+            return None
+
+
+
+    """####################################################
+    Internal methods
+    ####################################################"""
+
+
     def initConnection(self):
+        """
+        initConnection() - Parse teh parameter files and establish the serial connection to the ECU
+        """
 
         #Initialize the connection
         init_finished = False
 
         while not init_finished:
             try:
-                print "Trying to establish connection to ecu."
+                self._logFile.info('Trying to establish connection to ecu.')
                 self.connection.open()
                 #Query ecu/tcu to see which parameters are supported.
                 ecu_packet = self.connection.init(1)
                 tcu_packet = self.connection.init(2)
 
                 if ecu_packet == None or tcu_packet == None:
-                    print "Can't get initial data."
+                    print self._logFile.info('Cannot get initial data.')
                     continue
 
                 #Match the defined parameters against which ones are in teh ecu/tcu supported parameters
@@ -85,7 +210,7 @@ class EcuData():
                 #self.supported_parameters.sort(key=lambda p: int(p.get_id()[1:]), reverse=False)
 
                 init_finished = True
-                print "Connection initialized."
+                self._logFile.info('Connection initialized.')
 
             except IOError as e:
                 print "I/O error: {0} {1}".format(e.errno, e.strerror)
@@ -95,65 +220,23 @@ class EcuData():
                     time.sleep(3)
                 continue
 
-    def setMonitoredParams(self, paramIDs):
-        for id in paramIDs:
-            for p in self.supported_parameters.keys():
-                if p.get_id() == id:
-                    self.monitoredParameters.append(p)
-
-    def getMonitoredParams(self):
-        packets = self.connection.read_parameters(self.monitoredParameters)
-        currentValues = []
-        for i in range(len(packets)):
-            currentValues.append(self.monitoredParameters[i].get_value(packets[i]))
-        return currentValues
-
-
-    def __initCoreParameters__(self):
-        pass
-
-    """####################################################
-    Initialization methods - End
-    ####################################################"""
 
     def closeConnection(self):
+        """
+        closeConnection() - Closes the serial connection to the ECU
+        """
         self.connection.close()
 
-    """####################################################
-    Core Parameter Queries - Start
-    ####################################################"""
-    def _getParamByID(self, id):
-        if id in self.supported_parameters.keys():
-            parameter = self.supported_parameters[id]
-            response = self.connection.read_parameter(parameter)
-            return parameter.get_value(response)
-        else:
-            return None
 
-    def _getParamListByID(self, ids):
-        validParams = []
-        for id in ids:
-            if id in self.supported_parameters.keys():
-                validParams.append(self.supported_parameters[id])
-        if validParams:     # List not empty
-            responses = self.connection.read_parameters(validParams)
-            values = []
-            for i in range(len(responses)):
-                values.append(validParams[1].get_value(responses[i]))
-            return values
-        else:
-            return None
-
-    def getEngineSpeed(self):
-        return self._getParamByID("P8")
-
-    def getCurrentGear(self):
-        return self._getParamByID("E25")
-
-    def getThrottlePedalAngle(self):
-        return self._getParamByID("P13")
-
-    def isInGear(self):
-        # Check Neutral Switch (S4) and Clutch Switch (S63)
-        return self._getParamByID("S4") == "0" and self._getParamByID("S63") == "0"
-
+    def lookupParams(self, paramIds):
+        """
+        lookupParams(paramIds) - Looks up a given list of parameters in the master supported parameter list via the ID.
+            paramIds - List of parameter Ids to look up.
+        Return: Dictionary of parameters keyed by id.
+        """
+        params = {}
+        for id in paramIds:
+            for p in self.supported_parameters.keys():
+                if p.get_id() == id:
+                    params[id] = p
+        return params
