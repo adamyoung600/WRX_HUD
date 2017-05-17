@@ -6,6 +6,7 @@ import os
 import socket
 import fcntl
 import struct
+import RPi.GPIO as GPIO
 from subprocess import check_output
 
 #from EngineData.SSM.pimonitor.PMConnection import PMConnection
@@ -19,20 +20,43 @@ from DataDisplay import DataDisplay
 from Hardware.Input.SwitchPanel import SwitchPanel
 from Hardware.ShiftLights import ShiftLights
 from Hardware.BoostGauge import BoostGauge
+from Util.LogFile import LogFile
 
 
 class HUDMain():
 
     def __init__(self):
+        #Logging
+        self._logFile = LogFile()
+        self._logFile.info('=== Start System Initialization ===')
 
+        #Rasp pi specific
+        GPIO.setmode(GPIO.BCM)
+
+        #INPUTS
+        self._logFile.info('SWC Start')
         self._keyboard = Keyboard()
-        self._menuManager = MenuManager()
-        self._gearIndicator = GearIndicator()
-        self._dataDisplay = DataDisplay()
-        self._boostGauge = BoostGauge()
-
+        self._logFile.info('SWC Done')
+        self._logFile.info('ECU Start')
         self._ecu = EcuData()
+        self._logFile.info('ECU Done')
+        self._logFile.info('Switch Panel Start')
         self._switchPanel = SwitchPanel()
+        self._logFile.info('Switch Panel Done')
+
+        #OUTPUTS
+        self._logFile.info('Menu System Start')
+        self._menuManager = MenuManager()
+        self._logFile.info('Menu System Done')
+        self._logFile.info('Gear Display Start')
+        self._gearIndicator = GearIndicator()
+        self._logFile.info('Gear Display Done')
+        self._logFile.info('Parameter Display Start')
+        self._dataDisplay = DataDisplay()
+        self._logFile.info('Parameter Display Done')
+        self._logFile.info('Boost Gauge Start')
+        self._boostGauge = BoostGauge()
+        self._logFile.info('Boost Gauge Done')
 
         self._menuMode = False
 
@@ -40,18 +64,27 @@ class HUDMain():
         self._monitoredParamIDs = None
         self._rpmThresholds == None
         self._inActiveMonitoredMode = False
+        self._logFile.info('Read Config Start')
         self._loadConfig()      # Sets the monitored params in the ecu as well.
+        self._logFile.info('Read Config Done')
+        self._logFile.info('Shift Lights Start')
         self._shiftLights = ShiftLights(self._rpmThresholds)
+        self._logFile.info('Shift Lights Done')
 
         self._oldGear = None
         self._newGear = None
+
+        self._logFile.info('=== System Initialization Complete ===')
 
 
     def mainLoop(self):
         while True:
             if not self._menuMode:
+                # Have the ECU update all of the parameters it needs on this loop
+                self._ecu.refreshData()
+
                 # Query monitored parameters and update data display
-                monitoredValues = self._ecu.getMonitoredParams()
+                monitoredValues = self._ecu.getMonitoredParamValues()
                 self._dataDisplay.update(monitoredValues)
 
                 # UPdate Shift Lights
@@ -111,6 +144,7 @@ class HUDMain():
             self._menuManager.enterMenuMode()
             return
 
+        #Key assignment here is pretty arbitrary
         if inputVal == 'w':
             self.upButtonCallback()
         elif inputVal == 's':
