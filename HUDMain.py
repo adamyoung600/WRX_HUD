@@ -76,7 +76,6 @@ class HUDMain():
 
         self._logFile.info('=== System Initialization Complete ===')
 
-
     def mainLoop(self):
         while True:
             if not self._menuMode:

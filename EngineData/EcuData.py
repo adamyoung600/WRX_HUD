@@ -2,6 +2,7 @@
 Feb 2016
 @author: Adam Young
 '''
+import threading
 
 import time
 import thread
@@ -150,7 +151,6 @@ class EcuData():
             return None
 
 
-
     """####################################################
     Internal methods
     ####################################################"""
@@ -220,13 +220,15 @@ class EcuData():
                     time.sleep(3)
                 continue
 
+    def __initCoreParameters__(self):
+        # read in core parameters from config file.
+        pass
 
     def closeConnection(self):
         """
         closeConnection() - Closes the serial connection to the ECU
         """
         self.connection.close()
-
 
     def lookupParams(self, paramIds):
         """
