@@ -3,10 +3,10 @@ import RPi.GPIO as GPIO
 class ShiftLights():
 
     def __init__(self, thresholds):
-        self._greenLed = 27
-        self._orangeLed = 22
-        self._redLed = 23
-        self._blueLed = 24
+        self._greenLed = 17
+        self._orangeLed = 18
+        self._redLed = 27
+        self._blueLed = 22
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self._greenLed, GPIO.OUT)
         GPIO.setup(self._orangeLed, GPIO.OUT)
