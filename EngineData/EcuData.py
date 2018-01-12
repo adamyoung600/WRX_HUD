@@ -99,10 +99,6 @@ class EcuData():
         """
         #Build superset
         superset = self._coreParams.copy()
-        superset.update(self._monitoredParams)
-        if wotLogEnabled:
-            superset.update(self.logParams)
-        #Query ECU
         packets = self.connection.read_parameters(superset)
         #Update values
         for i in range(len(packets)):
@@ -110,10 +106,6 @@ class EcuData():
             value = superset[i].get_value(packets[i])
             if id in self._coreParamData:
                 self._coreParamData[id] = value
-            if id in self._monitoredParamData:
-                self._monitoredParamData[id] = value
-            if id in self._logParamData:
-                self._logParamData[id] = value
 
     def getEngineSpeed(self):
         return self._coreParamData["P8"]

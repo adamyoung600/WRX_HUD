@@ -34,9 +34,6 @@ class HUDMain():
         GPIO.setmode(GPIO.BCM)
 
         #INPUTS
-        self._logFile.info('SWC Start')
-        self._keyboard = Keyboard()
-        self._logFile.info('SWC Done')
         self._logFile.info('ECU Start')
         self._ecu = EcuData()
         self._logFile.info('ECU Done')
@@ -45,15 +42,9 @@ class HUDMain():
         self._logFile.info('Switch Panel Done')
 
         #OUTPUTS
-        self._logFile.info('Menu System Start')
-        self._menuManager = MenuManager()
-        self._logFile.info('Menu System Done')
         self._logFile.info('Gear Display Start')
         self._gearIndicator = GearIndicator()
         self._logFile.info('Gear Display Done')
-        self._logFile.info('Parameter Display Start')
-        self._dataDisplay = DataDisplay()
-        self._logFile.info('Parameter Display Done')
         self._logFile.info('Boost Gauge Start')
         self._boostGauge = BoostGauge()
         self._logFile.info('Boost Gauge Done')
@@ -78,43 +69,29 @@ class HUDMain():
 
     def mainLoop(self):
         while True:
-            if not self._menuMode:
-                # Have the ECU update all of the parameters it needs on this loop
-                self._ecu.refreshData()
+            # Have the ECU update all of the parameters it needs on this loop
+            self._ecu.refreshData()
 
-                # Query monitored parameters and update data display
-                monitoredValues = self._ecu.getMonitoredParamValues()
-                self._dataDisplay.update(monitoredValues)
+            # UPdate Shift Lights
+            rpm = int(self._ecu.getEngineSpeed())
+            if self._switchPanel.isShiftLightEnabled():
+                self._shiftLights.update(rpm)
 
-                # UPdate Shift Lights
-                rpm = int(self._ecu.getEngineSpeed())
-                if self._switchPanel.isShiftLightEnabled():
-                    self._shiftLights.update(rpm)
+            # Update Gear Display
+            if self._switchPanel.isLCDEnabled():
+                if not self._ecu.isInGear():
+                    self._newGear = "N"
+                else:
+                    self._newGear = self._ecu.getCurrentGear()
 
-                # Update Gear Display
-                if self._switchPanel.isLCDEnabled():
-                    if not self._ecu.isInGear():
-                        self._newGear = "N"
+                if self._newGear != self._oldGear:
+                    self._oldGear = self._newGear
+                    if self._newGear == "N":
+                        self._gearIndicator.DisplayNeutral()
                     else:
-                        self._newGear = self._ecu.getCurrentGear()
+                        self._gearIndicator.DisplayGear(self._newGear)
 
-                    if self._newGear != self._oldGear:
-                        self._oldGear = self._newGear
-                        if self._newGear == "N":
-                            self._gearIndicator.DisplayNeutral()
-                        else:
-                            self._gearIndicator.DisplayGear(self._newGear)
 
-                #TODO: Implement logger
-                #if self._ecu.getThrottlePedalAngle() > self._throttlePositionThreshold:
-                    #Start Logging
-
-                # Check for keyboard input
-                self.checkForKeyboardInput()
-
-            else:
-                while self.menuMode:
-                    self.checkForKeyboardInput()
 
     def _loadConfig(self):
         if not self._config:
@@ -122,8 +99,6 @@ class HUDMain():
         self._monitoredParamIDs = self._config.getMonitoredParams()
         self._rpmThresholds = self._config.getRpmThresholds()
         self._ecu.setMonitoredParams(self._monitoredParamIDs)
-        #TODO: Have the config save the active monitoring mode
-
 
     def calculateGear(self, engineSpeed, vehicleSpeed):
         pass
