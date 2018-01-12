@@ -34,6 +34,9 @@ class HUDMain():
         GPIO.setmode(GPIO.BCM)
 
         #INPUTS
+        self._logFile.info('SWC Start')
+        self._keyboard = Keyboard()
+        self._logFile.info('SWC Done')
         self._logFile.info('ECU Start')
         self._ecu = EcuData()
         self._logFile.info('ECU Done')
@@ -90,6 +93,7 @@ class HUDMain():
                         self._gearIndicator.DisplayNeutral()
                     else:
                         self._gearIndicator.DisplayGear(self._newGear)
+            self.checkForKeyboardInput()
 
 
 
@@ -112,87 +116,8 @@ class HUDMain():
     ##########################################
     def checkForKeyboardInput(self):
         inputVal = self._keyboard.getChar()
-
-        if self._menuMode == False and inputVal != None:
-            self.menuMode = True
-            self._menuManager.enterMenuMode()
-            return
-
-        #Key assignment here is pretty arbitrary
-        if inputVal == 'w':
-            self.upButtonCallback()
-        elif inputVal == 's':
-            self.downButtonCallback()
-        elif inputVal == 'p':
-            self.setButtonCallback()
-        elif inputVal == 'o':
-            self.backButtonCallback()
-
-    def setMenuMode(self, enableMenuMode):
-        self._menuMode = enableMenuMode
-
-    def setPassiveMonitorMode(self, inIsSet):
-        self._inPassiveMonitoredMode = inIsSet
+        if inputVal != None:
+            self._boostGauge.calibrate()
 
 
-#TODO: Below check if in passive mode first before passing button callbacks to menu manager
-    def upButtonCallback(self):
-        self._menuManager.upButtonCallback()
 
-    def downButtonCallback(self):
-        self._menuManager.downButtonCallback()
-
-    def setButtonCallback(self):
-        self._menuManager.setButtonCallback()
-
-    def backButtonCallback(self):
-        self._menuManager.backButtonCallback()
-
-    def calibrateBoost(self):
-        self._boostGauge.calibrate()
-
-    def resetSystem(self):
-        os.system("sudo reboot")
-
-    def shutdownSystem(self):
-        os.system("sudo shutdown -h now")
-
-# Below stolen from http://code.activestate.com/recipes/439094-get-the-ip-address-associated-with-a-network-inter/
-    def getIpAddress(self, inInterface):
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        return socket.inet_ntoa(fcntl.ioctl(
-            s.fileno(),
-            0x8915,  # SIOCGIFADDR
-            struct.pack('256s', inInterface[:15])
-        )[20:24])
-
-    def getSSID(self):
-        output = check_output(["iwconfig", "wlan0"])
-        ssid = "error"
-        for line in output.split():
-            if "ESSID" in line:
-                ssid = line.split(':')[1].replace('\"','')
-        return ssid
-
-    """
-    getOpenNetworks
-
-    Parses the output of "iwlist wlan0 scan" to find all open wifi networks.
-
-    Returns - List of SSIDs of all open networks in range
-    """
-    def getOpenNetworks(self):
-        output = check_output(["iwlist", "wlan0", "scan"])
-        networks = []
-        ssid = None
-        for line in output.split("\n"):
-            if "ESSID" in line:
-                ssid = line.split(':')[1].replace('\"','')
-            if "Encryption key:off" in line:
-                networks.append(ssid)
-        return networks
-
-    #Has to return a boolean
-    def connectToNetwork(self, inSSID):
-        print("Received request to connect to " + inSSID)
-        return True
